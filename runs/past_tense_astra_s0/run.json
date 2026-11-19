@@ -1,0 +1,34 @@
+{
+  "run_id": "past_tense_astra_s0",
+  "task": "past_tense",
+  "editor_model": "gpt-6-astra",
+  "editor_provider": "openai",
+  "k_shot": 0,
+  "effort": "max",
+  "lm": "Qwen/Qwen2.5-0.5B",
+  "passes_budget": 50,
+  "passes_used": 31,
+  "turns": 13,
+  "stop_reason": "end_turn",
+  "seconds": 405.76195192337036,
+  "usage": {
+    "input": 17477,
+    "output": 9674,
+    "cache_write": 0,
+    "cache_read": 89446,
+    "thinking": 3777
+  },
+  "cost_estimate_usd": 0.75,
+  "train_zero_shot_accuracy_after_edit": 1.0,
+  "delta_stats": {
+    "model.layers.14.mlp.down_proj.weight": {
+      "changed": 4358140,
+      "numel": 4358144,
+      "frac": 0.9999990821781015,
+      "delta_fro": 3.7957828044891357,
+      "base_fro": 39.1719970703125,
+      "rel": 0.09690041840076447
+    }
+  },
+  "final_text": "Applied a single **rank-one, in-place update** to `model.model.layers[14].mlp.down_proj.weight`.\n\nThe update recognizes activations associated with the final `Output:` position and adds a past-tense task direction derived from instructed and example-based prompts. The reading direction was constrained to respond minimally to unrelated text.\n\n- **Bare-prompt generation:** 16/16 supplied examples correct.\n- **Language-model preservation check:** negligible change on separate prose samples.\n- **Budget:** 31/50 forward passes.\n- No gradients used; all other parameters unchanged; no hooks remain.\n\nThe weight edit persists in the model. Hidden-test accuracy remains unmeasured."
+}

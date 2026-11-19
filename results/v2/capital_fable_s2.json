@@ -1,0 +1,1254 @@
+{
+  "task": "capital",
+  "run_id": "capital_fable_s2",
+  "seed": 2,
+  "lm": "Qwen/Qwen2.5-0.5B",
+  "n_test": 114,
+  "n_dev": 30,
+  "k": 16,
+  "protocol": "v2",
+  "acc_zero_shot_base": 0.02631578947368421,
+  "acc_icl_base": 0.9649122807017544,
+  "acc_icl_base_perms": [
+    0.9649122807017544,
+    0.956140350877193,
+    0.9736842105263158
+  ],
+  "acc_zero_shot_base_dev": 0.0,
+  "acc_icl_base_dev": 0.9666666666666667,
+  "task_vector_patch": {
+    "layer": 14,
+    "dev_acc": 0.9,
+    "test_acc": 0.9035087719298246,
+    "dev_by_layer": {
+      "0": 0.0,
+      "1": 0.0,
+      "2": 0.0,
+      "3": 0.0,
+      "4": 0.0,
+      "5": 0.0,
+      "6": 0.0,
+      "7": 0.0,
+      "8": 0.0,
+      "9": 0.0,
+      "10": 0.06666666666666667,
+      "11": 0.1,
+      "12": 0.16666666666666666,
+      "13": 0.6333333333333333,
+      "14": 0.9,
+      "15": 0.8666666666666667,
+      "16": 0.8666666666666667,
+      "17": 0.8666666666666667,
+      "18": 0.8666666666666667,
+      "19": 0.8,
+      "20": 0.7,
+      "21": 0.5666666666666667,
+      "22": 0.5,
+      "23": 0.0
+    }
+  },
+  "acc_zero_shot_random_edit": 0.02631578947368421,
+  "acc_zero_shot_edited": 0.9035087719298246,
+  "acc_icl_edited": 0.956140350877193,
+  "acc_zero_shot_edited_dev": 0.9,
+  "acc_zero_shot_edited_train": 0.875,
+  "agree_edited_vs_icl": 0.8421052631578947,
+  "agree_edited_vs_zsbase": 0.05263157894736842,
+  "kl_icl_vs_zsbase": 4.516331195831299,
+  "kl_icl_vs_edited": 0.213705375790596,
+  "p_gold_first_token": {
+    "zs_base": 0.03789929300546646,
+    "icl_base": 0.7781379222869873,
+    "zs_edited": 0.7136783003807068
+  },
+  "layer_cosine_icl_shift_vs_edit_shift": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.9635,
+    0.9384,
+    0.9464,
+    0.9516,
+    0.9579,
+    0.9652,
+    0.9676,
+    0.9636,
+    0.9483,
+    0.9597
+  ],
+  "layer_cosine_icl_shift_vs_random_edit_shift": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.0076,
+    -0.0016,
+    0.0219,
+    -0.0185,
+    -0.0052,
+    -0.0046,
+    -0.0008,
+    -0.0071,
+    -0.004,
+    0.0855
+  ],
+  "layer_norm_ratio_edit_over_icl": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.9373,
+    0.9089,
+    0.9162,
+    0.9141,
+    0.8658,
+    0.9088,
+    0.9332,
+    0.902,
+    0.9195,
+    0.9619
+  ],
+  "templates": {
+    "qa": {
+      "zs_base": 0.008771929824561403,
+      "icl_base": 0.9385964912280702,
+      "zs_edited": 0.7192982456140351
+    },
+    "arrow": {
+      "zs_base": 0.03508771929824561,
+      "icl_base": 0.956140350877193,
+      "zs_edited": 0.08771929824561403
+    },
+    "word_answer": {
+      "zs_base": 0.008771929824561403,
+      "icl_base": 0.956140350877193,
+      "zs_edited": 0.8070175438596491
+    }
+  },
+  "other_tasks": {
+    "antonym": {
+      "zs_base": 0.0,
+      "icl_base": 0.9833333333333333,
+      "zs_edited": 0.03333333333333333,
+      "icl_edited": 0.9833333333333333
+    },
+    "past_tense": {
+      "zs_base": 0.0,
+      "icl_base": 0.95,
+      "zs_edited": 0.0,
+      "icl_edited": 0.95
+    },
+    "en_fr": {
+      "zs_base": 0.0,
+      "icl_base": 0.85,
+      "zs_edited": 0.0,
+      "icl_edited": 0.8333333333333334
+    },
+    "times_2": {
+      "zs_base": 0.0,
+      "icl_base": 0.8166666666666667,
+      "zs_edited": 0.0,
+      "icl_edited": 0.7833333333333333
+    },
+    "add_7": {
+      "zs_base": 0.0,
+      "icl_base": 0.7666666666666667,
+      "zs_edited": 0.0,
+      "icl_edited": 0.7666666666666667
+    }
+  },
+  "wikitext_ppl": {
+    "base": 17.342557907104492,
+    "edited": 17.370615005493164
+  },
+  "arc_easy": {
+    "base": 0.665,
+    "edited": 0.69
+  },
+  "edit_stats": {
+    "n_tensors": 3,
+    "n_changed": 2688,
+    "n_total": 494032768,
+    "tensors": {
+      "model.layers.14.mlp.gate_proj.weight": 896,
+      "model.layers.14.mlp.up_proj.weight": 896,
+      "model.layers.14.mlp.down_proj.weight": 896
+    },
+    "frac_changed": 5.440934638570371e-06
+  },
+  "examples": [
+    {
+      "x": "Liechtenstein",
+      "gold": [
+        "Vaduz"
+      ],
+      "zs_base": "1000",
+      "icl_base": "vaduz",
+      "zs_edited": "vaduz"
+    },
+    {
+      "x": "Vatican City",
+      "gold": [
+        "Vatican City"
+      ],
+      "zs_base": "vatican city is a city in",
+      "icl_base": "vatican city",
+      "zs_edited": "vatican city is a city in"
+    },
+    {
+      "x": "Saudi Arabia",
+      "gold": [
+        "Riyadh"
+      ],
+      "zs_base": "saudi arabia",
+      "icl_base": "riyadh",
+      "zs_edited": "riyadh"
+    },
+    {
+      "x": "Niger",
+      "gold": [
+        "Niamey"
+      ],
+      "zs_base": "niger",
+      "icl_base": "niamey",
+      "zs_edited": "ni"
+    },
+    {
+      "x": "Cyprus",
+      "gold": [
+        "Nicosia"
+      ],
+      "zs_base": "cyprus",
+      "icl_base": "nicosia",
+      "zs_edited": "nicosia"
+    },
+    {
+      "x": "Norway",
+      "gold": [
+        "Oslo"
+      ],
+      "zs_base": "norway",
+      "icl_base": "oslo",
+      "zs_edited": "oslo"
+    },
+    {
+      "x": "Israel",
+      "gold": [
+        "Jerusalem"
+      ],
+      "zs_base": "israel",
+      "icl_base": "jerusalem",
+      "zs_edited": "jerusalem"
+    },
+    {
+      "x": "Spain",
+      "gold": [
+        "Madrid"
+      ],
+      "zs_base": "spain",
+      "icl_base": "madrid",
+      "zs_edited": "madrid"
+    },
+    {
+      "x": "United States",
+      "gold": [
+        "Washington",
+        "Washington, D.C.",
+        "Washington D.C."
+      ],
+      "zs_base": "united states",
+      "icl_base": "washington, d.c",
+      "zs_edited": "washington, d.c"
+    },
+    {
+      "x": "Tunisia",
+      "gold": [
+        "Tunis"
+      ],
+      "zs_base": "tunisia",
+      "icl_base": "tunis",
+      "zs_edited": "tunis"
+    },
+    {
+      "x": "Brazil",
+      "gold": [
+        "Brasilia"
+      ],
+      "zs_base": "brazil",
+      "icl_base": "brasilia",
+      "zs_edited": "brasilia"
+    },
+    {
+      "x": "Latvia",
+      "gold": [
+        "Riga"
+      ],
+      "zs_base": "10000",
+      "icl_base": "riga",
+      "zs_edited": "riga"
+    },
+    {
+      "x": "France",
+      "gold": [
+        "Paris"
+      ],
+      "zs_base": "france",
+      "icl_base": "paris",
+      "zs_edited": "paris"
+    },
+    {
+      "x": "Croatia",
+      "gold": [
+        "Zagreb"
+      ],
+      "zs_base": "croatia",
+      "icl_base": "zagreb",
+      "zs_edited": "zagreb"
+    },
+    {
+      "x": "Sweden",
+      "gold": [
+        "Stockholm"
+      ],
+      "zs_base": "sweden",
+      "icl_base": "stockholm",
+      "zs_edited": "stockholm"
+    },
+    {
+      "x": "Serbia",
+      "gold": [
+        "Belgrade"
+      ],
+      "zs_base": "serbia",
+      "icl_base": "belgrade",
+      "zs_edited": "belgrade"
+    },
+    {
+      "x": "South Africa",
+      "gold": [
+        "Pretoria",
+        "Cape Town"
+      ],
+      "zs_base": "south africa is a country in",
+      "icl_base": "cape town",
+      "zs_edited": "pretoria"
+    },
+    {
+      "x": "Togo",
+      "gold": [
+        "Lome"
+      ],
+      "zs_base": "togo",
+      "icl_base": "lome",
+      "zs_edited": "abidjan"
+    },
+    {
+      "x": "Fiji",
+      "gold": [
+        "Suva"
+      ],
+      "zs_base": "fiji",
+      "icl_base": "suva",
+      "zs_edited": "suva"
+    },
+    {
+      "x": "Cambodia",
+      "gold": [
+        "Phnom Penh"
+      ],
+      "zs_base": "cambodia",
+      "icl_base": "phnom penh",
+      "zs_edited": "phnom penh"
+    },
+    {
+      "x": "Iceland",
+      "gold": [
+        "Reykjavik"
+      ],
+      "zs_base": "iceland",
+      "icl_base": "reykjavik",
+      "zs_edited": "reykjavik"
+    },
+    {
+      "x": "Malaysia",
+      "gold": [
+        "Kuala Lumpur"
+      ],
+      "zs_base": "malaysia",
+      "icl_base": "kuala lumpur",
+      "zs_edited": "kuala lumpur"
+    },
+    {
+      "x": "Gabon",
+      "gold": [
+        "Libreville"
+      ],
+      "zs_base": "gabon",
+      "icl_base": "libreville",
+      "zs_edited": "libreville"
+    },
+    {
+      "x": "Zambia",
+      "gold": [
+        "Lusaka"
+      ],
+      "zs_base": "zambia",
+      "icl_base": "lusaka",
+      "zs_edited": "lusaka"
+    },
+    {
+      "x": "Ukraine",
+      "gold": [
+        "Kyiv",
+        "Kiev"
+      ],
+      "zs_base": "ukraine",
+      "icl_base": "kiev",
+      "zs_edited": "kiev"
+    },
+    {
+      "x": "Hungary",
+      "gold": [
+        "Budapest"
+      ],
+      "zs_base": "hungary",
+      "icl_base": "budapest",
+      "zs_edited": "budapest"
+    },
+    {
+      "x": "Azerbaijan",
+      "gold": [
+        "Baku"
+      ],
+      "zs_base": "azerbaijan",
+      "icl_base": "baku",
+      "zs_edited": "baku"
+    },
+    {
+      "x": "Monaco",
+      "gold": [
+        "Monaco"
+      ],
+      "zs_base": "1",
+      "icl_base": "monaco",
+      "zs_edited": "monaco"
+    },
+    {
+      "x": "Turkey",
+      "gold": [
+        "Ankara"
+      ],
+      "zs_base": "turkey",
+      "icl_base": "ankara",
+      "zs_edited": "ankara"
+    },
+    {
+      "x": "Afghanistan",
+      "gold": [
+        "Kabul"
+      ],
+      "zs_base": "afghanistan",
+      "icl_base": "kabul",
+      "zs_edited": "kabul"
+    },
+    {
+      "x": "Belgium",
+      "gold": [
+        "Brussels"
+      ],
+      "zs_base": "belgium",
+      "icl_base": "brussels",
+      "zs_edited": "brussels"
+    },
+    {
+      "x": "Lebanon",
+      "gold": [
+        "Beirut"
+      ],
+      "zs_base": "lebanon",
+      "icl_base": "beirut",
+      "zs_edited": "beirut"
+    },
+    {
+      "x": "Montenegro",
+      "gold": [
+        "Podgorica"
+      ],
+      "zs_base": "montenegro",
+      "icl_base": "podgorica",
+      "zs_edited": "podgorica"
+    },
+    {
+      "x": "Andorra",
+      "gold": [
+        "Andorra la Vella"
+      ],
+      "zs_base": "andorra",
+      "icl_base": "andorra la vella",
+      "zs_edited": "andorra"
+    },
+    {
+      "x": "Ethiopia",
+      "gold": [
+        "Addis Ababa"
+      ],
+      "zs_base": "ethiopia is a country in africa",
+      "icl_base": "addis ababa",
+      "zs_edited": "addis ababa"
+    },
+    {
+      "x": "North Korea",
+      "gold": [
+        "Pyongyang"
+      ],
+      "zs_base": "north korea",
+      "icl_base": "pyongyang",
+      "zs_edited": "pyongyang"
+    },
+    {
+      "x": "Turkmenistan",
+      "gold": [
+        "Ashgabat"
+      ],
+      "zs_base": "turkmenistan",
+      "icl_base": "ashgabat",
+      "zs_edited": "ashgabat"
+    },
+    {
+      "x": "Armenia",
+      "gold": [
+        "Yerevan"
+      ],
+      "zs_base": "armenia",
+      "icl_base": "yerevan",
+      "zs_edited": "yerevan"
+    },
+    {
+      "x": "Malawi",
+      "gold": [
+        "Lilongwe"
+      ],
+      "zs_base": "malawi",
+      "icl_base": "lilongwe",
+      "zs_edited": "lilongwe"
+    },
+    {
+      "x": "Slovakia",
+      "gold": [
+        "Bratislava"
+      ],
+      "zs_base": "slovakia",
+      "icl_base": "bratislava",
+      "zs_edited": "bratislava"
+    },
+    {
+      "x": "Senegal",
+      "gold": [
+        "Dakar"
+      ],
+      "zs_base": "senegal",
+      "icl_base": "dakar",
+      "zs_edited": "dakar"
+    },
+    {
+      "x": "Dominican Republic",
+      "gold": [
+        "Santo Domingo"
+      ],
+      "zs_base": "dominican republic",
+      "icl_base": "santo domingo",
+      "zs_edited": "santo domingo"
+    },
+    {
+      "x": "United Kingdom",
+      "gold": [
+        "London"
+      ],
+      "zs_base": "united kingdom",
+      "icl_base": "london",
+      "zs_edited": "london"
+    },
+    {
+      "x": "North Macedonia",
+      "gold": [
+        "Skopje"
+      ],
+      "zs_base": "north macedonia",
+      "icl_base": "skopje",
+      "zs_edited": "skopje"
+    },
+    {
+      "x": "Sri Lanka",
+      "gold": [
+        "Colombo",
+        "Sri Jayawardenepura Kotte"
+      ],
+      "zs_base": "sri lanka",
+      "icl_base": "colombo",
+      "zs_edited": "colombo"
+    },
+    {
+      "x": "Rwanda",
+      "gold": [
+        "Kigali"
+      ],
+      "zs_base": "rwanda",
+      "icl_base": "kigali",
+      "zs_edited": "kigali"
+    },
+    {
+      "x": "Guyana",
+      "gold": [
+        "Georgetown"
+      ],
+      "zs_base": "guyana",
+      "icl_base": "georgetown",
+      "zs_edited": "georgetown"
+    },
+    {
+      "x": "Austria",
+      "gold": [
+        "Vienna"
+      ],
+      "zs_base": "austria",
+      "icl_base": "vienna",
+      "zs_edited": "vienna"
+    },
+    {
+      "x": "Jordan",
+      "gold": [
+        "Amman"
+      ],
+      "zs_base": "jordan",
+      "icl_base": "amman",
+      "zs_edited": "amos"
+    },
+    {
+      "x": "Switzerland",
+      "gold": [
+        "Bern",
+        "Berne"
+      ],
+      "zs_base": "switzerland",
+      "icl_base": "bern",
+      "zs_edited": "bern, geneva, zurich"
+    },
+    {
+      "x": "Iran",
+      "gold": [
+        "Tehran"
+      ],
+      "zs_base": "iran",
+      "icl_base": "tehran",
+      "zs_edited": "tehran"
+    },
+    {
+      "x": "Qatar",
+      "gold": [
+        "Doha"
+      ],
+      "zs_base": "qatar",
+      "icl_base": "doha",
+      "zs_edited": "doha"
+    },
+    {
+      "x": "Botswana",
+      "gold": [
+        "Gaborone"
+      ],
+      "zs_base": "botswana",
+      "icl_base": "gaborone",
+      "zs_edited": "gaborone"
+    },
+    {
+      "x": "Papua New Guinea",
+      "gold": [
+        "Port Moresby"
+      ],
+      "zs_base": "papua new guinea",
+      "icl_base": "port moresby",
+      "zs_edited": "port moresby"
+    },
+    {
+      "x": "Kyrgyzstan",
+      "gold": [
+        "Bishkek"
+      ],
+      "zs_base": "kyrgyzstan",
+      "icl_base": "bishkek",
+      "zs_edited": "bishkek"
+    },
+    {
+      "x": "Uzbekistan",
+      "gold": [
+        "Tashkent"
+      ],
+      "zs_base": "uzbekistan",
+      "icl_base": "tashkent",
+      "zs_edited": "tashkent"
+    },
+    {
+      "x": "Zimbabwe",
+      "gold": [
+        "Harare"
+      ],
+      "zs_base": "zimbabwe",
+      "icl_base": "harare",
+      "zs_edited": "harare"
+    },
+    {
+      "x": "Paraguay",
+      "gold": [
+        "Asuncion"
+      ],
+      "zs_base": "paraguay",
+      "icl_base": "asuncion",
+      "zs_edited": "asuncion"
+    },
+    {
+      "x": "Pakistan",
+      "gold": [
+        "Islamabad"
+      ],
+      "zs_base": "pakistan is a country located in",
+      "icl_base": "islamabad",
+      "zs_edited": "islamabad"
+    },
+    {
+      "x": "United Arab Emirates",
+      "gold": [
+        "Abu Dhabi"
+      ],
+      "zs_base": "united arab emirates",
+      "icl_base": "abu dhabi",
+      "zs_edited": "abu dhabi"
+    },
+    {
+      "x": "Belize",
+      "gold": [
+        "Belmopan"
+      ],
+      "zs_base": "belize",
+      "icl_base": "belize city",
+      "zs_edited": "san pedro"
+    },
+    {
+      "x": "Benin",
+      "gold": [
+        "Porto-Novo",
+        "Cotonou"
+      ],
+      "zs_base": "10000",
+      "icl_base": "porto-novo",
+      "zs_edited": "porto alegre"
+    },
+    {
+      "x": "Lithuania",
+      "gold": [
+        "Vilnius"
+      ],
+      "zs_base": "lithuania",
+      "icl_base": "vilnius",
+      "zs_edited": "vilnius"
+    },
+    {
+      "x": "Yemen",
+      "gold": [
+        "Sanaa",
+        "Sana'a"
+      ],
+      "zs_base": "yemen",
+      "icl_base": "sana'a",
+      "zs_edited": "sanaa"
+    },
+    {
+      "x": "Cameroon",
+      "gold": [
+        "Yaounde"
+      ],
+      "zs_base": "cameroon is a country in africa",
+      "icl_base": "yaounde",
+      "zs_edited": "yaounde"
+    },
+    {
+      "x": "Guinea",
+      "gold": [
+        "Conakry"
+      ],
+      "zs_base": "guinea",
+      "icl_base": "conakry",
+      "zs_edited": "conakry"
+    },
+    {
+      "x": "Romania",
+      "gold": [
+        "Bucharest"
+      ],
+      "zs_base": "romania",
+      "icl_base": "bucharest",
+      "zs_edited": "bucharest"
+    },
+    {
+      "x": "Bolivia",
+      "gold": [
+        "La Paz",
+        "Sucre"
+      ],
+      "zs_base": "bolivia",
+      "icl_base": "sucre",
+      "zs_edited": "la paz"
+    },
+    {
+      "x": "Tanzania",
+      "gold": [
+        "Dodoma",
+        "Dar es Salaam"
+      ],
+      "zs_base": "tanzania",
+      "icl_base": "dar es salaam",
+      "zs_edited": "dar es salaam"
+    },
+    {
+      "x": "Honduras",
+      "gold": [
+        "Tegucigalpa"
+      ],
+      "zs_base": "honduras",
+      "icl_base": "san salvador",
+      "zs_edited": "san pedro sula"
+    },
+    {
+      "x": "Madagascar",
+      "gold": [
+        "Antananarivo"
+      ],
+      "zs_base": "madagascar",
+      "icl_base": "antananarivo",
+      "zs_edited": "antananarivo"
+    },
+    {
+      "x": "Oman",
+      "gold": [
+        "Muscat"
+      ],
+      "zs_base": "oman",
+      "icl_base": "muscat",
+      "zs_edited": "muscat"
+    },
+    {
+      "x": "San Marino",
+      "gold": [
+        "San Marino"
+      ],
+      "zs_base": "san marino",
+      "icl_base": "san marino",
+      "zs_edited": "san marino"
+    },
+    {
+      "x": "Slovenia",
+      "gold": [
+        "Ljubljana"
+      ],
+      "zs_base": "slovenia",
+      "icl_base": "ljubljana",
+      "zs_edited": "ljubljana"
+    },
+    {
+      "x": "Moldova",
+      "gold": [
+        "Chisinau"
+      ],
+      "zs_base": "moldova",
+      "icl_base": "chisinau",
+      "zs_edited": "chisinau"
+    },
+    {
+      "x": "Ivory Coast",
+      "gold": [
+        "Yamoussoukro",
+        "Abidjan"
+      ],
+      "zs_base": "ivory coast",
+      "icl_base": "abidjan",
+      "zs_edited": "abidjan"
+    },
+    {
+      "x": "Algeria",
+      "gold": [
+        "Algiers"
+      ],
+      "zs_base": "algeria",
+      "icl_base": "algiers",
+      "zs_edited": "algiers"
+    },
+    {
+      "x": "Mali",
+      "gold": [
+        "Bamako"
+      ],
+      "zs_base": "mali",
+      "icl_base": "bamako",
+      "zs_edited": "bam"
+    },
+    {
+      "x": "Czech Republic",
+      "gold": [
+        "Prague"
+      ],
+      "zs_base": "czech republic",
+      "icl_base": "prague",
+      "zs_edited": "prague"
+    },
+    {
+      "x": "Mexico",
+      "gold": [
+        "Mexico City"
+      ],
+      "zs_base": "mexico",
+      "icl_base": "mexico city",
+      "zs_edited": "mexico city"
+    },
+    {
+      "x": "Thailand",
+      "gold": [
+        "Bangkok"
+      ],
+      "zs_base": "thailand",
+      "icl_base": "bangkok",
+      "zs_edited": "bangkok"
+    },
+    {
+      "x": "Albania",
+      "gold": [
+        "Tirana"
+      ],
+      "zs_base": "albania",
+      "icl_base": "skopje",
+      "zs_edited": "tirana"
+    },
+    {
+      "x": "Brunei",
+      "gold": [
+        "Bandar Seri Begawan"
+      ],
+      "zs_base": "brunei",
+      "icl_base": "bandung",
+      "zs_edited": "brunei"
+    },
+    {
+      "x": "Japan",
+      "gold": [
+        "Tokyo"
+      ],
+      "zs_base": "japan",
+      "icl_base": "tokyo",
+      "zs_edited": "tokyo"
+    },
+    {
+      "x": "Ireland",
+      "gold": [
+        "Dublin"
+      ],
+      "zs_base": "ireland",
+      "icl_base": "dublin",
+      "zs_edited": "dublin"
+    },
+    {
+      "x": "Netherlands",
+      "gold": [
+        "Amsterdam"
+      ],
+      "zs_base": "10000",
+      "icl_base": "amsterdam",
+      "zs_edited": "amsterdam"
+    },
+    {
+      "x": "Morocco",
+      "gold": [
+        "Rabat"
+      ],
+      "zs_base": "morocco",
+      "icl_base": "rabat",
+      "zs_edited": "rabat"
+    },
+    {
+      "x": "Nigeria",
+      "gold": [
+        "Abuja"
+      ],
+      "zs_base": "nigeria",
+      "icl_base": "abuja",
+      "zs_edited": "abuja"
+    },
+    {
+      "x": "Myanmar",
+      "gold": [
+        "Naypyidaw",
+        "Yangon"
+      ],
+      "zs_base": "myanmar",
+      "icl_base": "naypyidaw",
+      "zs_edited": "naypyidaw"
+    },
+    {
+      "x": "Jamaica",
+      "gold": [
+        "Kingston"
+      ],
+      "zs_base": "jamaica",
+      "icl_base": "kingston",
+      "zs_edited": "kingston"
+    },
+    {
+      "x": "Denmark",
+      "gold": [
+        "Copenhagen"
+      ],
+      "zs_base": "denmark",
+      "icl_base": "copenhagen",
+      "zs_edited": "copenhagen"
+    },
+    {
+      "x": "Luxembourg",
+      "gold": [
+        "Luxembourg"
+      ],
+      "zs_base": "luxembourg",
+      "icl_base": "luxembourg",
+      "zs_edited": "luxembourg is a country in europe"
+    },
+    {
+      "x": "Ecuador",
+      "gold": [
+        "Quito"
+      ],
+      "zs_base": "ecuador",
+      "icl_base": "quito",
+      "zs_edited": "quito"
+    },
+    {
+      "x": "China",
+      "gold": [
+        "Beijing"
+      ],
+      "zs_base": "china",
+      "icl_base": "beijing",
+      "zs_edited": "beijing"
+    },
+    {
+      "x": "El Salvador",
+      "gold": [
+        "San Salvador"
+      ],
+      "zs_base": "el salvador is a country located",
+      "icl_base": "san salvador",
+      "zs_edited": "san salvador"
+    },
+    {
+      "x": "Bulgaria",
+      "gold": [
+        "Sofia"
+      ],
+      "zs_base": "bulgaria",
+      "icl_base": "sofia",
+      "zs_edited": "sofia"
+    },
+    {
+      "x": "Namibia",
+      "gold": [
+        "Windhoek"
+      ],
+      "zs_base": "namibia",
+      "icl_base": "windhoek",
+      "zs_edited": "windhoek"
+    },
+    {
+      "x": "Kuwait",
+      "gold": [
+        "Kuwait City"
+      ],
+      "zs_base": "kuwait",
+      "icl_base": "kuwait city",
+      "zs_edited": "kuwait"
+    },
+    {
+      "x": "Sierra Leone",
+      "gold": [
+        "Freetown"
+      ],
+      "zs_base": "sierra leone",
+      "icl_base": "freetown",
+      "zs_edited": "freetown"
+    },
+    {
+      "x": "Uruguay",
+      "gold": [
+        "Montevideo"
+      ],
+      "zs_base": "uruguay",
+      "icl_base": "montevideo",
+      "zs_edited": "montevideo"
+    },
+    {
+      "x": "Bahrain",
+      "gold": [
+        "Manama"
+      ],
+      "zs_base": "bahrain",
+      "icl_base": "manama",
+      "zs_edited": "manama"
+    },
+    {
+      "x": "Guatemala",
+      "gold": [
+        "Guatemala City"
+      ],
+      "zs_base": "guatemala",
+      "icl_base": "guatemala city",
+      "zs_edited": "guatemala"
+    },
+    {
+      "x": "Laos",
+      "gold": [
+        "Vientiane"
+      ],
+      "zs_base": "laos",
+      "icl_base": "vientiane",
+      "zs_edited": "vientiane"
+    },
+    {
+      "x": "Kenya",
+      "gold": [
+        "Nairobi"
+      ],
+      "zs_base": "kenya",
+      "icl_base": "nairobi",
+      "zs_edited": "nairobi"
+    },
+    {
+      "x": "Bahamas",
+      "gold": [
+        "Nassau"
+      ],
+      "zs_base": "bahamas",
+      "icl_base": "nassau",
+      "zs_edited": "nassau"
+    },
+    {
+      "x": "Egypt",
+      "gold": [
+        "Cairo"
+      ],
+      "zs_base": "egypt",
+      "icl_base": "cairo",
+      "zs_edited": "cairo"
+    },
+    {
+      "x": "Uganda",
+      "gold": [
+        "Kampala"
+      ],
+      "zs_base": "uganda",
+      "icl_base": "kampala",
+      "zs_edited": "kampala"
+    },
+    {
+      "x": "Poland",
+      "gold": [
+        "Warsaw"
+      ],
+      "zs_base": "poland",
+      "icl_base": "warsaw",
+      "zs_edited": "warsaw"
+    },
+    {
+      "x": "Finland",
+      "gold": [
+        "Helsinki"
+      ],
+      "zs_base": "finland",
+      "icl_base": "helsinki",
+      "zs_edited": "helsinki"
+    },
+    {
+      "x": "Ghana",
+      "gold": [
+        "Accra"
+      ],
+      "zs_base": "ghana",
+      "icl_base": "accra",
+      "zs_edited": "accra"
+    },
+    {
+      "x": "Venezuela",
+      "gold": [
+        "Caracas"
+      ],
+      "zs_base": "venezuela",
+      "icl_base": "caracas",
+      "zs_edited": "caracas"
+    },
+    {
+      "x": "Bangladesh",
+      "gold": [
+        "Dhaka"
+      ],
+      "zs_base": "bangladesh",
+      "icl_base": "dhaka",
+      "zs_edited": "dhaka"
+    },
+    {
+      "x": "Vietnam",
+      "gold": [
+        "Hanoi"
+      ],
+      "zs_base": "vietnam",
+      "icl_base": "hanoi",
+      "zs_edited": "hanoi"
+    },
+    {
+      "x": "Chile",
+      "gold": [
+        "Santiago"
+      ],
+      "zs_base": "chile",
+      "icl_base": "santiago",
+      "zs_edited": "santiago"
+    }
+  ],
+  "seconds": 313.74064779281616
+}

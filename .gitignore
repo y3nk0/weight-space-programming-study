@@ -1,0 +1,11 @@
+# secrets: never commit
+*key*.txt
+*.pem
+*.env
+.env
+# environments and caches
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store

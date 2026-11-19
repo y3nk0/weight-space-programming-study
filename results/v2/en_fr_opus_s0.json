@@ -1,0 +1,1409 @@
+{
+  "task": "en_fr",
+  "run_id": "en_fr_opus_s0",
+  "seed": 0,
+  "lm": "Qwen/Qwen2.5-0.5B",
+  "n_test": 129,
+  "n_dev": 30,
+  "k": 16,
+  "protocol": "v2",
+  "acc_zero_shot_base": 0.0,
+  "acc_icl_base": 0.8656330749354005,
+  "acc_icl_base_perms": [
+    0.8604651162790697,
+    0.875968992248062,
+    0.8604651162790697
+  ],
+  "acc_zero_shot_base_dev": 0.0,
+  "acc_icl_base_dev": 0.8,
+  "task_vector_patch": {
+    "layer": 17,
+    "dev_acc": 0.4,
+    "test_acc": 0.37209302325581395,
+    "dev_by_layer": {
+      "0": 0.0,
+      "1": 0.0,
+      "2": 0.0,
+      "3": 0.0,
+      "4": 0.0,
+      "5": 0.0,
+      "6": 0.0,
+      "7": 0.0,
+      "8": 0.0,
+      "9": 0.0,
+      "10": 0.0,
+      "11": 0.0,
+      "12": 0.0,
+      "13": 0.0,
+      "14": 0.0,
+      "15": 0.0,
+      "16": 0.0,
+      "17": 0.4,
+      "18": 0.13333333333333333,
+      "19": 0.13333333333333333,
+      "20": 0.1,
+      "21": 0.1,
+      "22": 0.06666666666666667,
+      "23": 0.03333333333333333
+    }
+  },
+  "acc_zero_shot_random_edit": 0.007751937984496124,
+  "acc_zero_shot_edited": 0.8372093023255814,
+  "acc_icl_edited": 0.8837209302325582,
+  "acc_zero_shot_edited_dev": 0.8666666666666667,
+  "acc_zero_shot_edited_train": 0.9375,
+  "agree_edited_vs_icl": 0.8062015503875969,
+  "agree_edited_vs_zsbase": 0.0,
+  "kl_icl_vs_zsbase": 9.09875202178955,
+  "kl_icl_vs_edited": 0.44781333208084106,
+  "p_gold_first_token": {
+    "zs_base": 0.0009032456437125802,
+    "icl_base": 0.6246315836906433,
+    "zs_edited": 0.41109803318977356
+  },
+  "layer_cosine_icl_shift_vs_edit_shift": [
+    0.0,
+    0.0174,
+    0.0849,
+    0.3022,
+    0.1916,
+    0.1823,
+    0.3254,
+    0.368,
+    0.367,
+    0.3154,
+    0.3406,
+    0.3293,
+    0.3869,
+    0.4159,
+    0.4199,
+    0.5409,
+    0.5606,
+    0.6766,
+    0.8001,
+    0.8307,
+    0.8793,
+    0.9157,
+    0.9231,
+    0.9184,
+    0.9202
+  ],
+  "layer_cosine_icl_shift_vs_random_edit_shift": [
+    0.0,
+    0.0133,
+    0.05,
+    0.3515,
+    0.2389,
+    0.2507,
+    0.3071,
+    0.356,
+    0.3913,
+    0.3156,
+    0.3385,
+    0.3781,
+    0.3894,
+    0.3866,
+    0.3341,
+    0.4319,
+    0.4509,
+    0.5297,
+    0.4894,
+    0.4818,
+    0.4299,
+    0.3916,
+    0.2471,
+    0.2416,
+    0.2873
+  ],
+  "layer_norm_ratio_edit_over_icl": [
+    0.0,
+    1.598,
+    3.0855,
+    3.3337,
+    2.5584,
+    1.9528,
+    1.7036,
+    1.5437,
+    1.6432,
+    1.5972,
+    1.4072,
+    1.4149,
+    1.2183,
+    1.1325,
+    0.8975,
+    0.9629,
+    0.9516,
+    0.851,
+    0.8842,
+    0.8951,
+    0.8906,
+    0.8837,
+    0.9043,
+    0.9202,
+    0.7988
+  ],
+  "templates": {
+    "qa": {
+      "zs_base": 0.0,
+      "icl_base": 0.8682170542635659,
+      "zs_edited": 0.0
+    },
+    "arrow": {
+      "zs_base": 0.0,
+      "icl_base": 0.8682170542635659,
+      "zs_edited": 0.0
+    },
+    "word_answer": {
+      "zs_base": 0.015503875968992248,
+      "icl_base": 0.9069767441860465,
+      "zs_edited": 0.015503875968992248
+    }
+  },
+  "other_tasks": {
+    "antonym": {
+      "zs_base": 0.0,
+      "icl_base": 0.9833333333333333,
+      "zs_edited": 0.0,
+      "icl_edited": 0.9166666666666666
+    },
+    "capital": {
+      "zs_base": 0.03333333333333333,
+      "icl_base": 0.9333333333333333,
+      "zs_edited": 0.016666666666666666,
+      "icl_edited": 0.8833333333333333
+    },
+    "past_tense": {
+      "zs_base": 0.0,
+      "icl_base": 0.95,
+      "zs_edited": 0.0,
+      "icl_edited": 0.9833333333333333
+    },
+    "times_2": {
+      "zs_base": 0.0,
+      "icl_base": 0.8166666666666667,
+      "zs_edited": 0.0,
+      "icl_edited": 0.16666666666666666
+    },
+    "add_7": {
+      "zs_base": 0.0,
+      "icl_base": 0.7666666666666667,
+      "zs_edited": 0.0,
+      "icl_edited": 0.8666666666666667
+    }
+  },
+  "wikitext_ppl": {
+    "base": 17.342557907104492,
+    "edited": 17.342599868774414
+  },
+  "arc_easy": {
+    "base": 0.665,
+    "edited": 0.665
+  },
+  "edit_stats": {
+    "n_tensors": 1,
+    "n_changed": 1788,
+    "n_total": 494032768,
+    "tensors": {
+      "model.embed_tokens.weight": 1788
+    },
+    "frac_changed": 3.61919313012047e-06
+  },
+  "examples": [
+    {
+      "x": "ear",
+      "gold": [
+        "oreille"
+      ],
+      "zs_base": "ear",
+      "icl_base": "oreille",
+      "zs_edited": "oreille"
+    },
+    {
+      "x": "chair",
+      "gold": [
+        "chaise"
+      ],
+      "zs_base": "1",
+      "icl_base": "chaise",
+      "zs_edited": "chaise"
+    },
+    {
+      "x": "hat",
+      "gold": [
+        "chapeau"
+      ],
+      "zs_base": "hat",
+      "icl_base": "chapeau",
+      "zs_edited": "chapeau"
+    },
+    {
+      "x": "eye",
+      "gold": [
+        "\u0153il",
+        "oeil"
+      ],
+      "zs_base": "eye",
+      "icl_base": "yeux",
+      "zs_edited": "oeil"
+    },
+    {
+      "x": "cheese",
+      "gold": [
+        "fromage"
+      ],
+      "zs_base": "1",
+      "icl_base": "chevre",
+      "zs_edited": "chevre"
+    },
+    {
+      "x": "week",
+      "gold": [
+        "semaine"
+      ],
+      "zs_base": "1",
+      "icl_base": "semaine",
+      "zs_edited": "semaine"
+    },
+    {
+      "x": "cat",
+      "gold": [
+        "chat"
+      ],
+      "zs_base": "cat",
+      "icl_base": "chat",
+      "zs_edited": "chat"
+    },
+    {
+      "x": "work",
+      "gold": [
+        "travail"
+      ],
+      "zs_base": "1",
+      "icl_base": "travail",
+      "zs_edited": "travail"
+    },
+    {
+      "x": "window",
+      "gold": [
+        "fen\u00eatre",
+        "fenetre"
+      ],
+      "zs_base": "1",
+      "icl_base": "fenetre",
+      "zs_edited": "fenetre"
+    },
+    {
+      "x": "white",
+      "gold": [
+        "blanc"
+      ],
+      "zs_base": "1",
+      "icl_base": "bleu",
+      "zs_edited": "blanc"
+    },
+    {
+      "x": "horse",
+      "gold": [
+        "cheval"
+      ],
+      "zs_base": "1",
+      "icl_base": "cheval",
+      "zs_edited": "cheval"
+    },
+    {
+      "x": "sea",
+      "gold": [
+        "mer"
+      ],
+      "zs_base": "1",
+      "icl_base": "mer",
+      "zs_edited": "mer"
+    },
+    {
+      "x": "beer",
+      "gold": [
+        "bi\u00e8re",
+        "biere"
+      ],
+      "zs_base": "1",
+      "icl_base": "biere",
+      "zs_edited": "bier"
+    },
+    {
+      "x": "man",
+      "gold": [
+        "homme"
+      ],
+      "zs_base": "1",
+      "icl_base": "homme",
+      "zs_edited": "homme"
+    },
+    {
+      "x": "sun",
+      "gold": [
+        "soleil"
+      ],
+      "zs_base": "1",
+      "icl_base": "soleil",
+      "zs_edited": "soleil"
+    },
+    {
+      "x": "friend",
+      "gold": [
+        "ami",
+        "amie"
+      ],
+      "zs_base": "true",
+      "icl_base": "ami",
+      "zs_edited": "ami"
+    },
+    {
+      "x": "bird",
+      "gold": [
+        "oiseau"
+      ],
+      "zs_base": "1",
+      "icl_base": "oiseau",
+      "zs_edited": "oiseau"
+    },
+    {
+      "x": "river",
+      "gold": [
+        "rivi\u00e8re",
+        "riviere",
+        "fleuve"
+      ],
+      "zs_base": "1",
+      "icl_base": "riviere",
+      "zs_edited": "riviere"
+    },
+    {
+      "x": "year",
+      "gold": [
+        "an",
+        "ann\u00e9e",
+        "annee"
+      ],
+      "zs_base": "1900",
+      "icl_base": "annee",
+      "zs_edited": "annee"
+    },
+    {
+      "x": "bad",
+      "gold": [
+        "mauvais"
+      ],
+      "zs_base": "1",
+      "icl_base": "mauvais",
+      "zs_edited": "mauvais"
+    },
+    {
+      "x": "to read",
+      "gold": [
+        "lire"
+      ],
+      "zs_base": "to read",
+      "icl_base": "lire",
+      "zs_edited": "lire"
+    },
+    {
+      "x": "one",
+      "gold": [
+        "un"
+      ],
+      "zs_base": "1",
+      "icl_base": "un",
+      "zs_edited": "un"
+    },
+    {
+      "x": "black",
+      "gold": [
+        "noir"
+      ],
+      "zs_base": "0",
+      "icl_base": "noir",
+      "zs_edited": "noir"
+    },
+    {
+      "x": "city",
+      "gold": [
+        "ville"
+      ],
+      "zs_base": "1",
+      "icl_base": "ville",
+      "zs_edited": "ville"
+    },
+    {
+      "x": "meat",
+      "gold": [
+        "viande"
+      ],
+      "zs_base": "1",
+      "icl_base": "viande",
+      "zs_edited": "viande"
+    },
+    {
+      "x": "please",
+      "gold": [
+        "s'il vous pla\u00eet",
+        "s'il vous plait",
+        "s'il te pla\u00eet"
+      ],
+      "zs_base": "please",
+      "icl_base": "pardon",
+      "zs_edited": "pardon"
+    },
+    {
+      "x": "kitchen",
+      "gold": [
+        "cuisine"
+      ],
+      "zs_base": "kitchen",
+      "icl_base": "cuisine",
+      "zs_edited": "cuisine"
+    },
+    {
+      "x": "slow",
+      "gold": [
+        "lent"
+      ],
+      "zs_base": "1",
+      "icl_base": "lent",
+      "zs_edited": "lentille"
+    },
+    {
+      "x": "red",
+      "gold": [
+        "rouge"
+      ],
+      "zs_base": "1",
+      "icl_base": "rouge",
+      "zs_edited": "rouge"
+    },
+    {
+      "x": "salt",
+      "gold": [
+        "sel"
+      ],
+      "zs_base": "1",
+      "icl_base": "sal",
+      "zs_edited": "sal"
+    },
+    {
+      "x": "to drink",
+      "gold": [
+        "boire"
+      ],
+      "zs_base": "to drink",
+      "icl_base": "boire",
+      "zs_edited": "boire"
+    },
+    {
+      "x": "nose",
+      "gold": [
+        "nez"
+      ],
+      "zs_base": "1",
+      "icl_base": "nez",
+      "zs_edited": "sourc"
+    },
+    {
+      "x": "fish",
+      "gold": [
+        "poisson"
+      ],
+      "zs_base": "1",
+      "icl_base": "poissons",
+      "zs_edited": "poisson"
+    },
+    {
+      "x": "four",
+      "gold": [
+        "quatre"
+      ],
+      "zs_base": "4",
+      "icl_base": "quatre",
+      "zs_edited": "quatre"
+    },
+    {
+      "x": "forest",
+      "gold": [
+        "for\u00eat",
+        "foret"
+      ],
+      "zs_base": "1",
+      "icl_base": "foret",
+      "zs_edited": "foret"
+    },
+    {
+      "x": "moon",
+      "gold": [
+        "lune"
+      ],
+      "zs_base": "1",
+      "icl_base": "lune",
+      "zs_edited": "lune"
+    },
+    {
+      "x": "new",
+      "gold": [
+        "nouveau",
+        "neuf"
+      ],
+      "zs_base": "1",
+      "icl_base": "nouveau",
+      "zs_edited": "nouvelle"
+    },
+    {
+      "x": "boy",
+      "gold": [
+        "gar\u00e7on",
+        "garcon"
+      ],
+      "zs_base": "1",
+      "icl_base": "garcon",
+      "zs_edited": "garcon"
+    },
+    {
+      "x": "summer",
+      "gold": [
+        "\u00e9t\u00e9",
+        "ete"
+      ],
+      "zs_base": "summer",
+      "icl_base": "ete",
+      "zs_edited": "ete"
+    },
+    {
+      "x": "full",
+      "gold": [
+        "plein"
+      ],
+      "zs_base": "1",
+      "icl_base": "pleine",
+      "zs_edited": "complete"
+    },
+    {
+      "x": "bread",
+      "gold": [
+        "pain"
+      ],
+      "zs_base": "1",
+      "icl_base": "pain",
+      "zs_edited": "pain"
+    },
+    {
+      "x": "tooth",
+      "gold": [
+        "dent"
+      ],
+      "zs_base": "tooth",
+      "icl_base": "dents",
+      "zs_edited": "dentin"
+    },
+    {
+      "x": "bed",
+      "gold": [
+        "lit"
+      ],
+      "zs_base": "1",
+      "icl_base": "lit",
+      "zs_edited": "chaise"
+    },
+    {
+      "x": "yes",
+      "gold": [
+        "oui"
+      ],
+      "zs_base": "yes",
+      "icl_base": "oui",
+      "zs_edited": "oui"
+    },
+    {
+      "x": "name",
+      "gold": [
+        "nom"
+      ],
+      "zs_base": "name",
+      "icl_base": "nom",
+      "zs_edited": "nom"
+    },
+    {
+      "x": "to come",
+      "gold": [
+        "venir"
+      ],
+      "zs_base": "to come",
+      "icl_base": "venir",
+      "zs_edited": "venir"
+    },
+    {
+      "x": "beautiful",
+      "gold": [
+        "beau",
+        "belle"
+      ],
+      "zs_base": "beautiful",
+      "icl_base": "belle",
+      "zs_edited": "belle"
+    },
+    {
+      "x": "to eat",
+      "gold": [
+        "manger"
+      ],
+      "zs_base": "to eat",
+      "icl_base": "boire",
+      "zs_edited": "manger"
+    },
+    {
+      "x": "hour",
+      "gold": [
+        "heure"
+      ],
+      "zs_base": "0",
+      "icl_base": "heure",
+      "zs_edited": "heure"
+    },
+    {
+      "x": "open",
+      "gold": [
+        "ouvert",
+        "ouvrir"
+      ],
+      "zs_base": "0",
+      "icl_base": "ouvert",
+      "zs_edited": "ouvert"
+    },
+    {
+      "x": "eight",
+      "gold": [
+        "huit"
+      ],
+      "zs_base": "8",
+      "icl_base": "huit",
+      "zs_edited": "huit"
+    },
+    {
+      "x": "big",
+      "gold": [
+        "grand",
+        "gros"
+      ],
+      "zs_base": "1",
+      "icl_base": "grand",
+      "zs_edited": "gros"
+    },
+    {
+      "x": "mother",
+      "gold": [
+        "m\u00e8re",
+        "mere"
+      ],
+      "zs_base": "mother",
+      "icl_base": "mere",
+      "zs_edited": "mere"
+    },
+    {
+      "x": "difficult",
+      "gold": [
+        "difficile"
+      ],
+      "zs_base": "1",
+      "icl_base": "difficile",
+      "zs_edited": "difficile"
+    },
+    {
+      "x": "money",
+      "gold": [
+        "argent"
+      ],
+      "zs_base": "0",
+      "icl_base": "argent",
+      "zs_edited": "argent"
+    },
+    {
+      "x": "rice",
+      "gold": [
+        "riz"
+      ],
+      "zs_base": "rice",
+      "icl_base": "riz",
+      "zs_edited": "pates"
+    },
+    {
+      "x": "garden",
+      "gold": [
+        "jardin"
+      ],
+      "zs_base": "1",
+      "icl_base": "jardin",
+      "zs_edited": "jardin"
+    },
+    {
+      "x": "to write",
+      "gold": [
+        "\u00e9crire",
+        "ecrire"
+      ],
+      "zs_base": "to write",
+      "icl_base": "ecrire",
+      "zs_edited": "ecrire"
+    },
+    {
+      "x": "day",
+      "gold": [
+        "jour",
+        "journ\u00e9e"
+      ],
+      "zs_base": "1",
+      "icl_base": "jour",
+      "zs_edited": "jour"
+    },
+    {
+      "x": "world",
+      "gold": [
+        "monde"
+      ],
+      "zs_base": "1",
+      "icl_base": "monde",
+      "zs_edited": "monde"
+    },
+    {
+      "x": "thank you",
+      "gold": [
+        "merci"
+      ],
+      "zs_base": "thank you",
+      "icl_base": "merci",
+      "zs_edited": "merci"
+    },
+    {
+      "x": "here",
+      "gold": [
+        "ici"
+      ],
+      "zs_base": "here",
+      "icl_base": "ici",
+      "zs_edited": "ici"
+    },
+    {
+      "x": "shoe",
+      "gold": [
+        "chaussure"
+      ],
+      "zs_base": "1",
+      "icl_base": "chaussee",
+      "zs_edited": "chaussure"
+    },
+    {
+      "x": "rich",
+      "gold": [
+        "riche"
+      ],
+      "zs_base": "1",
+      "icl_base": "riche",
+      "zs_edited": "riche"
+    },
+    {
+      "x": "sister",
+      "gold": [
+        "s\u0153ur",
+        "soeur"
+      ],
+      "zs_base": "sister",
+      "icl_base": "s\u0153ur",
+      "zs_edited": "s\u0153ur"
+    },
+    {
+      "x": "table",
+      "gold": [
+        "table"
+      ],
+      "zs_base": "1",
+      "icl_base": "table",
+      "zs_edited": "table"
+    },
+    {
+      "x": "coffee",
+      "gold": [
+        "caf\u00e9",
+        "cafe"
+      ],
+      "zs_base": "1",
+      "icl_base": "cafe",
+      "zs_edited": "cafe"
+    },
+    {
+      "x": "sad",
+      "gold": [
+        "triste"
+      ],
+      "zs_base": "1",
+      "icl_base": "triste",
+      "zs_edited": "triste"
+    },
+    {
+      "x": "music",
+      "gold": [
+        "musique"
+      ],
+      "zs_base": "music",
+      "icl_base": "musique",
+      "zs_edited": "musique"
+    },
+    {
+      "x": "king",
+      "gold": [
+        "roi"
+      ],
+      "zs_base": "1",
+      "icl_base": "roi",
+      "zs_edited": "roi"
+    },
+    {
+      "x": "wine",
+      "gold": [
+        "vin"
+      ],
+      "zs_base": "1",
+      "icl_base": "vin",
+      "zs_edited": "vin"
+    },
+    {
+      "x": "door",
+      "gold": [
+        "porte"
+      ],
+      "zs_base": "1",
+      "icl_base": "porte",
+      "zs_edited": "porte"
+    },
+    {
+      "x": "small",
+      "gold": [
+        "petit"
+      ],
+      "zs_base": "1",
+      "icl_base": "petit",
+      "zs_edited": "petite"
+    },
+    {
+      "x": "weak",
+      "gold": [
+        "faible"
+      ],
+      "zs_base": "false",
+      "icl_base": "faible",
+      "zs_edited": "faible"
+    },
+    {
+      "x": "tomorrow",
+      "gold": [
+        "demain"
+      ],
+      "zs_base": "10000",
+      "icl_base": "demain",
+      "zs_edited": "demain"
+    },
+    {
+      "x": "winter",
+      "gold": [
+        "hiver"
+      ],
+      "zs_base": "winter",
+      "icl_base": "hiver",
+      "zs_edited": "hiver"
+    },
+    {
+      "x": "ten",
+      "gold": [
+        "dix"
+      ],
+      "zs_base": "10",
+      "icl_base": "dix",
+      "zs_edited": "dix"
+    },
+    {
+      "x": "child",
+      "gold": [
+        "enfant"
+      ],
+      "zs_base": "0",
+      "icl_base": "enfant",
+      "zs_edited": "enfant"
+    },
+    {
+      "x": "street",
+      "gold": [
+        "rue"
+      ],
+      "zs_base": "1",
+      "icl_base": "rue",
+      "zs_edited": "rue"
+    },
+    {
+      "x": "knife",
+      "gold": [
+        "couteau"
+      ],
+      "zs_base": "1",
+      "icl_base": "couteau",
+      "zs_edited": "couteau"
+    },
+    {
+      "x": "to sleep",
+      "gold": [
+        "dormir"
+      ],
+      "zs_base": "to sleep is to rest and",
+      "icl_base": "dormir",
+      "zs_edited": "dormir"
+    },
+    {
+      "x": "time",
+      "gold": [
+        "temps"
+      ],
+      "zs_base": "0",
+      "icl_base": "temps",
+      "zs_edited": "temps"
+    },
+    {
+      "x": "milk",
+      "gold": [
+        "lait"
+      ],
+      "zs_base": "1",
+      "icl_base": "miel",
+      "zs_edited": "lait"
+    },
+    {
+      "x": "heart",
+      "gold": [
+        "c\u0153ur",
+        "coeur"
+      ],
+      "zs_base": "1",
+      "icl_base": "c\u0153ur",
+      "zs_edited": "c\u0153ur"
+    },
+    {
+      "x": "good",
+      "gold": [
+        "bon"
+      ],
+      "zs_base": "1",
+      "icl_base": "bon",
+      "zs_edited": "bonjour"
+    },
+    {
+      "x": "mouth",
+      "gold": [
+        "bouche"
+      ],
+      "zs_base": "mouth",
+      "icl_base": "oreille",
+      "zs_edited": "l'oreille"
+    },
+    {
+      "x": "two",
+      "gold": [
+        "deux"
+      ],
+      "zs_base": "2",
+      "icl_base": "deux",
+      "zs_edited": "deux"
+    },
+    {
+      "x": "dog",
+      "gold": [
+        "chien"
+      ],
+      "zs_base": "1",
+      "icl_base": "chien",
+      "zs_edited": "chien"
+    },
+    {
+      "x": "peace",
+      "gold": [
+        "paix"
+      ],
+      "zs_base": "peace",
+      "icl_base": "paix",
+      "zs_edited": "paix"
+    },
+    {
+      "x": "pig",
+      "gold": [
+        "cochon",
+        "porc"
+      ],
+      "zs_base": "pig",
+      "icl_base": "poisson",
+      "zs_edited": "chien"
+    },
+    {
+      "x": "water",
+      "gold": [
+        "eau"
+      ],
+      "zs_base": "1",
+      "icl_base": "eau",
+      "zs_edited": "eau"
+    },
+    {
+      "x": "apple",
+      "gold": [
+        "pomme"
+      ],
+      "zs_base": "1",
+      "icl_base": "pomme",
+      "zs_edited": "pomme"
+    },
+    {
+      "x": "tea",
+      "gold": [
+        "th\u00e9",
+        "the"
+      ],
+      "zs_base": "1",
+      "icl_base": "the",
+      "zs_edited": "the"
+    },
+    {
+      "x": "nine",
+      "gold": [
+        "neuf"
+      ],
+      "zs_base": "9",
+      "icl_base": "neuf",
+      "zs_edited": "neuf"
+    },
+    {
+      "x": "song",
+      "gold": [
+        "chanson"
+      ],
+      "zs_base": "1",
+      "icl_base": "chanson",
+      "zs_edited": "chanson"
+    },
+    {
+      "x": "chicken",
+      "gold": [
+        "poulet"
+      ],
+      "zs_base": "1",
+      "icl_base": "chien",
+      "zs_edited": "oie"
+    },
+    {
+      "x": "today",
+      "gold": [
+        "aujourd'hui"
+      ],
+      "zs_base": "0",
+      "icl_base": "aujourd'hui",
+      "zs_edited": "aujourd'hui"
+    },
+    {
+      "x": "green",
+      "gold": [
+        "vert"
+      ],
+      "zs_base": "1",
+      "icl_base": "vert",
+      "zs_edited": "vert"
+    },
+    {
+      "x": "hand",
+      "gold": [
+        "main"
+      ],
+      "zs_base": "0",
+      "icl_base": "main",
+      "zs_edited": "main"
+    },
+    {
+      "x": "language",
+      "gold": [
+        "langue",
+        "langage"
+      ],
+      "zs_base": "1",
+      "icl_base": "langue",
+      "zs_edited": "langue"
+    },
+    {
+      "x": "fire",
+      "gold": [
+        "feu"
+      ],
+      "zs_base": "1",
+      "icl_base": "feu",
+      "zs_edited": "fumee"
+    },
+    {
+      "x": "spring",
+      "gold": [
+        "printemps"
+      ],
+      "zs_base": "spring",
+      "icl_base": "printemps",
+      "zs_edited": "printemps"
+    },
+    {
+      "x": "yesterday",
+      "gold": [
+        "hier"
+      ],
+      "zs_base": "0",
+      "icl_base": "demain",
+      "zs_edited": "demain"
+    },
+    {
+      "x": "to speak",
+      "gold": [
+        "parler"
+      ],
+      "zs_base": "to speak is to communicate or",
+      "icl_base": "parler",
+      "zs_edited": "parler"
+    },
+    {
+      "x": "foot",
+      "gold": [
+        "pied"
+      ],
+      "zs_base": "1",
+      "icl_base": "pied",
+      "zs_edited": "pied"
+    },
+    {
+      "x": "egg",
+      "gold": [
+        "\u0153uf",
+        "oeuf"
+      ],
+      "zs_base": "0",
+      "icl_base": "\u0153uf",
+      "zs_edited": "omelette"
+    },
+    {
+      "x": "flower",
+      "gold": [
+        "fleur"
+      ],
+      "zs_base": "1",
+      "icl_base": "fleur",
+      "zs_edited": "fleur"
+    },
+    {
+      "x": "empty",
+      "gold": [
+        "vide"
+      ],
+      "zs_base": "true",
+      "icl_base": "vide",
+      "zs_edited": "vide"
+    },
+    {
+      "x": "brother",
+      "gold": [
+        "fr\u00e8re",
+        "frere"
+      ],
+      "zs_base": "1",
+      "icl_base": "frere",
+      "zs_edited": "frere"
+    },
+    {
+      "x": "cloud",
+      "gold": [
+        "nuage"
+      ],
+      "zs_base": "1",
+      "icl_base": "nuage",
+      "zs_edited": "nuage"
+    },
+    {
+      "x": "no",
+      "gold": [
+        "non"
+      ],
+      "zs_base": "0",
+      "icl_base": "non",
+      "zs_edited": "non"
+    },
+    {
+      "x": "happy",
+      "gold": [
+        "heureux",
+        "content"
+      ],
+      "zs_base": "1",
+      "icl_base": "heureux",
+      "zs_edited": "heureux"
+    },
+    {
+      "x": "sheep",
+      "gold": [
+        "mouton"
+      ],
+      "zs_base": "1",
+      "icl_base": "chien",
+      "zs_edited": "chien"
+    },
+    {
+      "x": "spoon",
+      "gold": [
+        "cuill\u00e8re",
+        "cuillere"
+      ],
+      "zs_base": "spoon",
+      "icl_base": "poele",
+      "zs_edited": "poele"
+    },
+    {
+      "x": "young",
+      "gold": [
+        "jeune"
+      ],
+      "zs_base": "young",
+      "icl_base": "jeune",
+      "zs_edited": "jeune"
+    },
+    {
+      "x": "father",
+      "gold": [
+        "p\u00e8re",
+        "pere"
+      ],
+      "zs_base": "1",
+      "icl_base": "pere",
+      "zs_edited": "pere"
+    },
+    {
+      "x": "five",
+      "gold": [
+        "cinq"
+      ],
+      "zs_base": "5",
+      "icl_base": "cinq",
+      "zs_edited": "cinq"
+    },
+    {
+      "x": "yellow",
+      "gold": [
+        "jaune"
+      ],
+      "zs_base": "1",
+      "icl_base": "jaune",
+      "zs_edited": "jaune"
+    },
+    {
+      "x": "right",
+      "gold": [
+        "droite",
+        "droit"
+      ],
+      "zs_base": "1",
+      "icl_base": "droit",
+      "zs_edited": "droite"
+    },
+    {
+      "x": "earth",
+      "gold": [
+        "terre"
+      ],
+      "zs_base": "1",
+      "icl_base": "terre",
+      "zs_edited": "terre"
+    },
+    {
+      "x": "to go",
+      "gold": [
+        "aller"
+      ],
+      "zs_base": "to go",
+      "icl_base": "aller",
+      "zs_edited": "aller"
+    },
+    {
+      "x": "closed",
+      "gold": [
+        "ferm\u00e9",
+        "ferme"
+      ],
+      "zs_base": "false",
+      "icl_base": "ferme",
+      "zs_edited": "ferme"
+    },
+    {
+      "x": "life",
+      "gold": [
+        "vie"
+      ],
+      "zs_base": "life",
+      "icl_base": "vie",
+      "zs_edited": "vie"
+    },
+    {
+      "x": "to give",
+      "gold": [
+        "donner"
+      ],
+      "zs_base": "to give is the past tense",
+      "icl_base": "verser",
+      "zs_edited": "donner"
+    },
+    {
+      "x": "six",
+      "gold": [
+        "six"
+      ],
+      "zs_base": "6",
+      "icl_base": "six",
+      "zs_edited": "six"
+    },
+    {
+      "x": "fast",
+      "gold": [
+        "rapide",
+        "vite"
+      ],
+      "zs_base": "1",
+      "icl_base": "vite",
+      "zs_edited": "rapide"
+    },
+    {
+      "x": "car",
+      "gold": [
+        "voiture"
+      ],
+      "zs_base": "1",
+      "icl_base": "voiture",
+      "zs_edited": "voiture"
+    },
+    {
+      "x": "word",
+      "gold": [
+        "mot"
+      ],
+      "zs_base": "1",
+      "icl_base": "mot",
+      "zs_edited": "mot"
+    },
+    {
+      "x": "snow",
+      "gold": [
+        "neige"
+      ],
+      "zs_base": "0",
+      "icl_base": "neige",
+      "zs_edited": "neige"
+    }
+  ],
+  "seconds": 127.54490065574646
+}

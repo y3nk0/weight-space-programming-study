@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this notebook or these results, please cite the paper below."
+title: "Weight-Space Programming Writes In-Context Learning and Matches Fine-Tuning in Language Models"
+authors:
+  - family-names: Skianis
+    given-names: Konstantinos
+    affiliation: "Department of Computer Science and Engineering, University of Ioannina"
+  - family-names: Likas
+    given-names: Aristidis
+    affiliation: "Department of Computer Science and Engineering, University of Ioannina"
+year: 2026
+license: MIT

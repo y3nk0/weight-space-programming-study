@@ -1,0 +1,337 @@
+{
+  "run_id": "antonym_gemini150_s0",
+  "task": "antonym",
+  "editor_model": "gemini-4-argon",
+  "editor_provider": "gemini",
+  "effort": "max",
+  "lm": "Qwen/Qwen2.5-0.5B",
+  "passes_budget": 50,
+  "passes_used": 43,
+  "turns": 94,
+  "stop_reason": "end_turn",
+  "seconds": 6407.559226036072,
+  "usage": {
+    "input": 12261789,
+    "output": 176860,
+    "cache_write": 0,
+    "cache_read": 10616034,
+    "thinking": 95903
+  },
+  "cost_estimate_usd": 27.35,
+  "train_zero_shot_accuracy_after_edit": 1.0,
+  "delta_stats": {
+    "model.layers.8.mlp.gate_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 3.940730094909668,
+      "base_fro": 46.079647064208984,
+      "rel": 0.08551997691392899
+    },
+    "model.layers.8.mlp.up_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 0.5138528943061829,
+      "base_fro": 40.13396453857422,
+      "rel": 0.012803442776203156
+    },
+    "model.layers.8.mlp.down_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 0.5095452070236206,
+      "base_fro": 38.51679611206055,
+      "rel": 0.013229168951511383
+    },
+    "model.layers.9.mlp.gate_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 4.339463710784912,
+      "base_fro": 43.51375961303711,
+      "rel": 0.09972623735666275
+    },
+    "model.layers.9.mlp.up_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 0.5153816342353821,
+      "base_fro": 39.8537483215332,
+      "rel": 0.01293182373046875
+    },
+    "model.layers.9.mlp.down_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 0.5121725797653198,
+      "base_fro": 38.258975982666016,
+      "rel": 0.013386991806328297
+    },
+    "model.layers.10.mlp.gate_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 3.9290411472320557,
+      "base_fro": 45.120513916015625,
+      "rel": 0.08707881718873978
+    },
+    "model.layers.10.mlp.up_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 0.5490742921829224,
+      "base_fro": 39.4272575378418,
+      "rel": 0.013926261104643345
+    },
+    "model.layers.10.mlp.down_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 0.5323391556739807,
+      "base_fro": 37.39209747314453,
+      "rel": 0.014236675575375557
+    },
+    "model.layers.11.mlp.gate_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 4.287513732910156,
+      "base_fro": 41.260406494140625,
+      "rel": 0.10391351580619812
+    },
+    "model.layers.11.mlp.up_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 0.5096654891967773,
+      "base_fro": 39.437904357910156,
+      "rel": 0.01292323973029852
+    },
+    "model.layers.11.mlp.down_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 0.4858250617980957,
+      "base_fro": 38.10934066772461,
+      "rel": 0.012748188339173794
+    },
+    "model.layers.12.mlp.gate_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 4.680451393127441,
+      "base_fro": 42.53359603881836,
+      "rel": 0.11004128307104111
+    },
+    "model.layers.12.mlp.up_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 0.5306994318962097,
+      "base_fro": 40.70977783203125,
+      "rel": 0.013036166317760944
+    },
+    "model.layers.12.mlp.down_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 0.511701226234436,
+      "base_fro": 38.75931167602539,
+      "rel": 0.013202020898461342
+    },
+    "model.layers.13.mlp.gate_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 5.586600303649902,
+      "base_fro": 41.06687545776367,
+      "rel": 0.13603664934635162
+    },
+    "model.layers.13.mlp.up_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 0.5760053992271423,
+      "base_fro": 41.43556594848633,
+      "rel": 0.013901231810450554
+    },
+    "model.layers.13.mlp.down_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 0.5415849685668945,
+      "base_fro": 39.41665267944336,
+      "rel": 0.01374000497162342
+    },
+    "model.layers.14.mlp.gate_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 4.536715030670166,
+      "base_fro": 42.63555908203125,
+      "rel": 0.10640683770179749
+    },
+    "model.layers.14.mlp.up_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 0.6504234075546265,
+      "base_fro": 41.3328857421875,
+      "rel": 0.01573622040450573
+    },
+    "model.layers.14.mlp.down_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 0.5898805856704712,
+      "base_fro": 39.1719970703125,
+      "rel": 0.015058731660246849
+    },
+    "model.layers.15.mlp.gate_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 3.8890023231506348,
+      "base_fro": 42.466651916503906,
+      "rel": 0.09157779812812805
+    },
+    "model.layers.15.mlp.up_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 0.5101575255393982,
+      "base_fro": 42.455318450927734,
+      "rel": 0.012016339227557182
+    },
+    "model.layers.15.mlp.down_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 0.5022832751274109,
+      "base_fro": 40.310611724853516,
+      "rel": 0.012460323981940746
+    },
+    "model.layers.16.mlp.gate_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 4.308151721954346,
+      "base_fro": 45.12806701660156,
+      "rel": 0.09546501934528351
+    },
+    "model.layers.16.mlp.up_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 0.48782461881637573,
+      "base_fro": 40.74092483520508,
+      "rel": 0.011973822489380836
+    },
+    "model.layers.16.mlp.down_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 0.4641408920288086,
+      "base_fro": 38.703582763671875,
+      "rel": 0.011992194689810276
+    },
+    "model.layers.17.mlp.gate_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 4.0192646980285645,
+      "base_fro": 47.04497146606445,
+      "rel": 0.08543452620506287
+    },
+    "model.layers.17.mlp.up_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 0.7526999115943909,
+      "base_fro": 39.636146545410156,
+      "rel": 0.01899024099111557
+    },
+    "model.layers.17.mlp.down_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 0.7152804732322693,
+      "base_fro": 38.10447692871094,
+      "rel": 0.01877155900001526
+    },
+    "model.layers.18.mlp.gate_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 4.5567946434021,
+      "base_fro": 44.86390686035156,
+      "rel": 0.1015692725777626
+    },
+    "model.layers.18.mlp.up_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 0.5055550336837769,
+      "base_fro": 41.226253509521484,
+      "rel": 0.012262938544154167
+    },
+    "model.layers.18.mlp.down_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 0.5121748447418213,
+      "base_fro": 39.71796417236328,
+      "rel": 0.012895294465124607
+    },
+    "model.layers.19.mlp.gate_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 4.52042818069458,
+      "base_fro": 44.74055480957031,
+      "rel": 0.10103648155927658
+    },
+    "model.layers.19.mlp.up_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 0.7157836556434631,
+      "base_fro": 42.35734176635742,
+      "rel": 0.016898691654205322
+    },
+    "model.layers.19.mlp.down_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 0.7641395926475525,
+      "base_fro": 40.747440338134766,
+      "rel": 0.018753070384263992
+    },
+    "model.layers.20.mlp.gate_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 4.358057022094727,
+      "base_fro": 44.056270599365234,
+      "rel": 0.09892024099826813
+    },
+    "model.layers.20.mlp.up_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 1.014985203742981,
+      "base_fro": 43.43076705932617,
+      "rel": 0.02337018772959709
+    },
+    "model.layers.20.mlp.down_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 0.7971237301826477,
+      "base_fro": 41.489017486572266,
+      "rel": 0.019212884828448296
+    }
+  },
+  "final_text": "### Summary of Analysis and Weight Edits\n\n#### 1. Mechanistic Analysis of the Antonym Circuit in Qwen2.5-0.5B\nBy capturing full residual-stream, attention-head (`o_proj` input), and MLP activations on 0-shot prompts (`Input: {x}\\nOutput:`), 15-shot ICL prompts, and instruction-prefixed prompts in a single batched forward pass, we identified why the unedited model fails zero-shot (0/16 accuracy) and how it solves the task in context:\n- **Dormant Antonym & Copy-Suppression Heads**: In the unedited model, even on 0-shot inputs `Input: {x}\\nOutput:`, the value vectors $v_0(x)$ at the input word position `x_pos` already encode the antonym transformation under specific heads' OV circuits\u2014most notably **`L16H08`** and **`L18H05`** (which map `x` directly to `+y` and `-x`), concept-mover heads **`L14H07`**, **`L16H05`**, **`L18H01`** (which move `x` to the final `:` position for non-linear amplification by MLPs 18\u201322), and copy-suppression heads **`L20H09`** and **`L21H00`** (which subtract `x`).\n- **Why 0-shot fails**: In 0-shot prompts, the queries $q(\\text{`:'})$ at the final `:` token after `Output` lack the task-conditioning vector normally supplied by attending to prior demonstrations or instructions. Consequently, heads `L14H07`, `L16H05`, `L16H08`, `L18H01`, `L18H05`, and `L20H09` dump 65%\u201390% of their attention into the position-0 attention sink (`'Input'`) instead of attending to `x_pos`, while copy heads (`L21H03`, `L21H10`) copy `x`.\n- **Causal Recurrence**: Once the residual stream at the final `:` token (`colon_pos`) is steered onto the task trajectory across layers 8\u201320, attention heads `L14H07`, `L16H05`, `L16H08`, `L18H01`, and `L18H05` automatically shift 80%\u201398% of their attention onto `x_pos`, copy heads `L21H03` and `L21H10` shut off (<2% attention to `x_pos`), and MLPs 18\u201323 amplify the antonym `y`.\n\n#### 2. Surgical Weight Edit: Closed-Loop Mesa-SwiGLU Single-Neuron Steering\nTo inject the task trajectory exclusively at the final `:` of `Input: {x}\\nOutput:` without damaging general language modeling, we repurposed **1 quietest MLP neuron per layer in Layers 8\u201320** (13 neurons total out of 116,736 MLP neurons, i.e., `0.021%` of weights in those layers):\n1. **Within-Class-Invariant Detector (`w_det`)**: At each layer $l \\in \\{8, \\dots, 20\\}$, we solved a regularized linear discriminant objective on `mlp_in[l]` that maps the `Output:` colon state to $+1$ and all other token positions (including the first `:` after `Input`, `x`, `\\n`, `Output`, post-answer tokens `y`, and general prose/code/JSON/dialogue colons) to $-1.5$, while penalizing variance along the input-word `{x}` subspace so the detector is invariant to word identity.\n2. **Flat-Top \"Mesa\" SwiGLU Gate**: Instead of setting $w_{\\text{up}} \\propto w_{\\text{gate}}$ (which makes $\\text{SiLU}(\\beta s)s \\approx \\beta s^2$ quadratic and sensitive to small variations $s = 1 + \\epsilon$), we paired $w_{\\text{gate}} = \\beta w_{\\text{det}}$ ($\\beta=16$) with $w_{\\text{up}} \\propto (2 w_{\\text{const}} - w_{\\text{det}}) / \\beta$, yielding:\n   $$\\text{SiLU}\\big(\\beta(1+\\epsilon)\\big)(1-\\epsilon) \\approx 1 - \\epsilon^2$$\n   This creates a flat-top response ($\\approx 1.0$) across unseen inputs `{x}` at `Output:`, while $\\text{SiLU}(\\beta s)$ decays exponentially ($\\approx 0$) for $s < -0.3$ on all other tokens.\n3. **Closed-Loop Sequential Calibration & Unembedding Orthogonalization**: Propagating the edited recurrence sequentially from Layer 8 to Layer 20, we set each neuron's `down_proj` column `w_down` to supply the exact residual discrepancy between the target task trajectory (a 60/40 blend of clean 15-shot ICL and instruction task states on `train_examples`) and the natural layer step, while projecting out the 24-D centered unembedding subspace of the 16 training words in Layers 16\u201320 to prevent any memorization of training tokens.\n\n#### 3. Verification\n- **Training set zero-shot accuracy (`eval_train`)**: **16/16 (100.0%)** (up from 0/16).\n- **Held-out validation accuracy**: **63/64 (98.4%)** first-token accuracy and **60/64 (93.8%)** strict 6-token generation accuracy across 64 unseen antonym pairs (including multi-token inputs and outputs).\n- **General language modeling preservation**: Across 1,069 tokens of diverse prose, code, JSON, math, and dialogue containing colons, top-1 next-token agreement with the unedited model is **99.91%** with a KL divergence of **$1.7 \\times 10^{-5}$**."
+}

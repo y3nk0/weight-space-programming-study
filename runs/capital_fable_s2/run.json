@@ -1,0 +1,49 @@
+{
+  "run_id": "capital_fable_s2",
+  "task": "capital",
+  "editor_model": "claude-fable-5-1",
+  "editor_provider": "anthropic",
+  "effort": "max",
+  "lm": "Qwen/Qwen2.5-0.5B",
+  "passes_budget": 50,
+  "passes_used": 44,
+  "turns": 28,
+  "stop_reason": "end_turn",
+  "seconds": 746.4027185440063,
+  "usage": {
+    "input": 58,
+    "output": 44309,
+    "cache_write": 62857,
+    "cache_read": 944911,
+    "thinking": 0
+  },
+  "cost_estimate_usd": 3.95,
+  "train_zero_shot_accuracy_after_edit": 0.875,
+  "delta_stats": {
+    "model.layers.14.mlp.gate_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 1.1371195316314697,
+      "base_fro": 42.63555908203125,
+      "rel": 0.026670685037970543
+    },
+    "model.layers.14.mlp.up_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 1.133291482925415,
+      "base_fro": 41.3328857421875,
+      "rel": 0.02741863951086998
+    },
+    "model.layers.14.mlp.down_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 0.5047386288642883,
+      "base_fro": 39.1719970703125,
+      "rel": 0.01288518961519003
+    }
+  },
+  "final_text": "**What I did**\n\n1. **Diagnosis (baseline = 0 %)**: zero\u2011shot the model just copies the country (`Input: France\\nOutput: France`). The capital is often in the top\u20115, so the knowledge is there but the \"answer with the capital\" mode is not triggered.\n\n2. **Task vector**: ran 64 zero\u2011shot prompts and the same 64 queries with 10 in\u2011context demos (built from the train pairs) and took the mean difference of the residual stream at the final `:` token at every layer (very consistent across examples, cos \u2248 0.97). Hook experiments showed that adding this difference at **all** positions destroys the country information, but adding it **only at the last token** at the output of **layer 14** (the point where the few\u2011shot/zero\u2011shot gap jumps) flips the model from copying to retrieving the capital (first-token acc 0.875 train / 0.96 val), matching the best multi\u2011layer schemes.\n\n3. **Weight edit (one neuron, layer 14 MLP)**: to make the injection position\u2011specific without hooks, I repurposed the least\u2011important neuron of `model.layers[14].mlp` (index 4234, importance \u22486\u00d7 below median):\n   - `gate_proj[4234] = up_proj[4234] = d`, a unit LDA direction (closed form, no gradients) over the layer\u201114 `post_attention_layernorm` outputs that separates the `Output:` colon position (projection \u2248 13.8) from every other token position, including answer tokens (\u2264 1.0). Because the activation is `silu(d\u00b7x)\u00b7(d\u00b7x)`, it is \u2248190 at the target position and quadratically \u22480 everywhere else (verified: 1.0\u00d7 at `:` and 0.00 at country/answer tokens).\n   - `down_proj[:, 4234] = task_vector / 190`, so exactly the layer\u201114 few\u2011shot\u2011minus\u2011zero\u2011shot vector is added to the residual stream at the `Output:` position only.\n   All other parameters are untouched (the temporary attention\u2011bias experiments were fully restored).\n\n**Results (zero\u2011shot, greedy, test format)**\n- train pairs: 14/16 correct; held\u2011out validation (48 countries): 45/48; a further 64 countries: 53/64 (misses are mostly ambiguous names like Chad/Jordan/Georgia, or accepted variants such as \"Kiev\", \"Yaound\u00e9\", \"Washington, D.C.\").\n- Outputs are clean (`\" Paris\\n\u2026\"`), so the first\u2011line comparison works.\n- General LM unaffected: loss on generic text 1.947 \u2192 1.935; the neuron only fires noticeably in `Output:`/`Answer:` style contexts."
+}

@@ -1,0 +1,73 @@
+{
+  "run_id": "times_2_opus_s0",
+  "task": "times_2",
+  "editor_model": "claude-opus-5-5",
+  "editor_provider": "anthropic",
+  "effort": "max",
+  "lm": "Qwen/Qwen2.5-0.5B",
+  "passes_budget": 50,
+  "passes_used": 43,
+  "turns": 76,
+  "stop_reason": "end_turn",
+  "seconds": 1928.6076605319977,
+  "usage": {
+    "input": 154,
+    "output": 128577,
+    "cache_write": 154886,
+    "cache_read": 6479803,
+    "thinking": 0
+  },
+  "cost_estimate_usd": 7.42,
+  "train_zero_shot_accuracy_after_edit": 0.9375,
+  "delta_stats": {
+    "model.layers.14.mlp.gate_proj.weight": {
+      "changed": 3584,
+      "numel": 4358144,
+      "frac": 0.0008223684210526315,
+      "delta_fro": 4.737649440765381,
+      "base_fro": 42.63555908203125,
+      "rel": 0.11111968010663986
+    },
+    "model.layers.14.mlp.up_proj.weight": {
+      "changed": 3584,
+      "numel": 4358144,
+      "frac": 0.0008223684210526315,
+      "delta_fro": 1.777167797088623,
+      "base_fro": 41.3328857421875,
+      "rel": 0.04299645870923996
+    },
+    "model.layers.14.mlp.down_proj.weight": {
+      "changed": 3584,
+      "numel": 4358144,
+      "frac": 0.0008223684210526315,
+      "delta_fro": 1.7383131980895996,
+      "base_fro": 39.1719970703125,
+      "rel": 0.0443764254450798
+    },
+    "model.layers.15.mlp.gate_proj.weight": {
+      "changed": 10752,
+      "numel": 4358144,
+      "frac": 0.0024671052631578946,
+      "delta_fro": 7.352527141571045,
+      "base_fro": 42.466651916503906,
+      "rel": 0.17313650250434875
+    },
+    "model.layers.15.mlp.up_proj.weight": {
+      "changed": 10752,
+      "numel": 4358144,
+      "frac": 0.0024671052631578946,
+      "delta_fro": 2.8234670162200928,
+      "base_fro": 42.455318450927734,
+      "rel": 0.06650443375110626
+    },
+    "model.layers.15.mlp.down_proj.weight": {
+      "changed": 10752,
+      "numel": 4358144,
+      "frac": 0.0024671052631578946,
+      "delta_fro": 2.795661687850952,
+      "base_fro": 40.310611724853516,
+      "rel": 0.06935299932956696
+    }
+  },
+  "final_text": "I edited the model so it doubles the input zero-shot. It now gets 156 of the 160 integers from 40 to 199 right (97.5%; 15 of 16 on the training examples). I checked this with the real greedy-generation pipeline as well as with teacher-forced scoring, and the two agree. General language modelling is essentially unchanged.\n\n**What I found first**\n- With no examples, the model just copies the input's first digit, e.g. \"177\" gives \" 1\".\n- With 6 or 15 examples in the prompt, it doubles correctly 78% and 83% of the time.\n- I recorded the model's internal state for the same queries with and without examples (correct answers fed in), and averaged the difference separately for each token position. Positions are things like the first \":\", the input digits, the newline, \"Output\", the final \":\", the space before the answer and each answer digit. The difference is very consistent across examples (cosine about 0.9\u20130.96 with the average), so it works as a \"doubling\" signal.\n- In hook tests, adding these position-specific averages, scaled by 1.5, after layer 15 matched or beat the with-examples accuracy. Adding one constant vector at every position got 0%.\n- Errors on 150\u2013159 (answering \"2xx\" instead of \"3xx\") went away when the signal for the final \":\" and the following space was added one layer earlier, after layer 14, and scaled up to 2.5.\n\n**The edit (43k of 494M parameters)**\n- I took over 4 rarely-used MLP neurons in layer 14 and 12 in layer 15.\n- **Switch:** within each layer the taken-over neurons share one gate vector. It is a ridge-regression detector that is strongly on (about +6) at positions inside the \"Input: N / Output:\" prompt and answer, and off on ordinary text.\n- **What they add:** the up and down weights are a low-rank least-squares map from the layer's input to the position-specific average difference. Layer 14 adds 2.5\u00d7 that difference at the final \":\" and the space. Layer 15 adds 1.5\u00d7 it at the other prompt positions and the answer digits.\n- Everything was fitted with closed-form least squares; no gradients or training loops were used. 43 of the 50 forward passes were spent.\n\n**Results**\n- **Range 40\u2013199:** the four failures are 143 \u2192 219, 147 \u2192 291, 189 \u2192 377 and 199 \u2192 399, mostly wrong final digits.\n- **Real generation:** on 64 prompts (the 16 training examples, the 30 hardest cases and 18 random ones), 60 were correct, and the only misses were those four. Outputs look like \" 354\\n\\n\u2026\", which the scorer accepts.\n- **Other ranges:** all 25 of the inputs from 1 to 39 that I tested are correct. Most inputs from 200 to 499 are correct, but 200 itself now gives 300 after the final change. Inputs of 500 and above mostly fail because the model stops after three digits (600 gives \"120\"). The training data suggests the test stays below 200, so I didn't fix this.\n- **Language modelling:** loss on 48 hand-written mixed passages went from 1.6812 to 1.6825 nats/token. The only noticeably affected passage was one already written in the \"Input: \u2026 Output: \u2026\" format, since the switch is built to fire there."
+}

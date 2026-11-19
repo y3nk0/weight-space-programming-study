@@ -1,0 +1,1342 @@
+{
+  "task": "past_tense",
+  "run_id": "past_tense_fable_p50",
+  "seed": 0,
+  "lm": "Qwen/Qwen2.5-0.5B",
+  "n_test": 124,
+  "n_dev": 30,
+  "k": 16,
+  "protocol": "v2",
+  "acc_zero_shot_base": 0.0,
+  "acc_icl_base": 0.9381720430107526,
+  "acc_icl_base_perms": [
+    0.9354838709677419,
+    0.9435483870967742,
+    0.9354838709677419
+  ],
+  "acc_zero_shot_base_dev": 0.0,
+  "acc_icl_base_dev": 0.9666666666666667,
+  "task_vector_patch": {
+    "layer": 21,
+    "dev_acc": 0.8666666666666667,
+    "test_acc": 0.8467741935483871,
+    "dev_by_layer": {
+      "0": 0.0,
+      "1": 0.0,
+      "2": 0.0,
+      "3": 0.0,
+      "4": 0.0,
+      "5": 0.0,
+      "6": 0.0,
+      "7": 0.0,
+      "8": 0.0,
+      "9": 0.0,
+      "10": 0.0,
+      "11": 0.0,
+      "12": 0.0,
+      "13": 0.3,
+      "14": 0.6666666666666666,
+      "15": 0.6333333333333333,
+      "16": 0.8,
+      "17": 0.8333333333333334,
+      "18": 0.8,
+      "19": 0.7,
+      "20": 0.7333333333333333,
+      "21": 0.8666666666666667,
+      "22": 0.8,
+      "23": 0.2
+    }
+  },
+  "acc_zero_shot_random_edit": 0.0,
+  "acc_zero_shot_edited": 0.9274193548387096,
+  "acc_icl_edited": 0.9758064516129032,
+  "acc_zero_shot_edited_dev": 0.9666666666666667,
+  "acc_zero_shot_edited_train": 1.0,
+  "agree_edited_vs_icl": 0.9112903225806451,
+  "agree_edited_vs_zsbase": 0.0,
+  "kl_icl_vs_zsbase": 5.935666084289551,
+  "kl_icl_vs_edited": 0.31582728028297424,
+  "p_gold_first_token": {
+    "zs_base": 0.005903579760342836,
+    "icl_base": 0.8842635154724121,
+    "zs_edited": 0.7132372856140137
+  },
+  "layer_cosine_icl_shift_vs_edit_shift": [
+    0.0,
+    -0.0565,
+    0.1671,
+    0.2937,
+    0.1572,
+    0.1331,
+    0.2723,
+    0.3191,
+    0.27,
+    0.2942,
+    0.273,
+    0.2566,
+    0.2968,
+    0.3284,
+    0.3676,
+    0.4389,
+    0.4614,
+    0.5296,
+    0.5934,
+    0.634,
+    0.6983,
+    0.7651,
+    0.7918,
+    0.7923,
+    0.79
+  ],
+  "layer_cosine_icl_shift_vs_random_edit_shift": [
+    0.0,
+    -0.0058,
+    0.0856,
+    0.1874,
+    0.092,
+    0.1769,
+    0.2317,
+    0.047,
+    0.0077,
+    -0.0251,
+    -0.008,
+    -0.019,
+    0.0696,
+    0.1318,
+    0.1393,
+    0.1614,
+    0.1622,
+    0.1039,
+    0.1361,
+    0.1098,
+    0.1167,
+    0.0641,
+    0.0845,
+    0.0779,
+    0.1795
+  ],
+  "layer_norm_ratio_edit_over_icl": [
+    0.0,
+    1.4412,
+    2.7143,
+    3.2119,
+    2.2657,
+    1.8571,
+    1.867,
+    1.9309,
+    2.085,
+    2.0934,
+    1.8636,
+    1.8618,
+    1.7,
+    1.5484,
+    1.2286,
+    1.2439,
+    1.1724,
+    1.0661,
+    1.0482,
+    1.0348,
+    1.02,
+    0.9704,
+    0.9906,
+    1.0411,
+    0.652
+  ],
+  "templates": {
+    "qa": {
+      "zs_base": 0.0,
+      "icl_base": 0.967741935483871,
+      "zs_edited": 0.0
+    },
+    "arrow": {
+      "zs_base": 0.008064516129032258,
+      "icl_base": 0.9596774193548387,
+      "zs_edited": 0.008064516129032258
+    },
+    "word_answer": {
+      "zs_base": 0.0,
+      "icl_base": 0.9516129032258065,
+      "zs_edited": 0.0
+    }
+  },
+  "other_tasks": {
+    "antonym": {
+      "zs_base": 0.0,
+      "icl_base": 0.9833333333333333,
+      "zs_edited": 0.0,
+      "icl_edited": 0.9
+    },
+    "capital": {
+      "zs_base": 0.03333333333333333,
+      "icl_base": 0.9333333333333333,
+      "zs_edited": 0.0,
+      "icl_edited": 0.9
+    },
+    "en_fr": {
+      "zs_base": 0.0,
+      "icl_base": 0.85,
+      "zs_edited": 0.0,
+      "icl_edited": 0.8333333333333334
+    },
+    "times_2": {
+      "zs_base": 0.0,
+      "icl_base": 0.8166666666666667,
+      "zs_edited": 0.0,
+      "icl_edited": 0.03333333333333333
+    },
+    "add_7": {
+      "zs_base": 0.0,
+      "icl_base": 0.7666666666666667,
+      "zs_edited": 0.0,
+      "icl_edited": 0.85
+    }
+  },
+  "wikitext_ppl": {
+    "base": 17.342557907104492,
+    "edited": 17.44204330444336
+  },
+  "arc_easy": {
+    "base": 0.665,
+    "edited": 0.635
+  },
+  "edit_stats": {
+    "n_tensors": 7,
+    "n_changed": 8959,
+    "n_total": 494032768,
+    "tensors": {
+      "model.embed_tokens.weight": 895,
+      "model.layers.0.mlp.gate_proj.weight": 1792,
+      "model.layers.0.mlp.up_proj.weight": 1792,
+      "model.layers.0.mlp.down_proj.weight": 1792,
+      "model.layers.23.mlp.gate_proj.weight": 896,
+      "model.layers.23.mlp.up_proj.weight": 896,
+      "model.layers.23.mlp.down_proj.weight": 896
+    },
+    "frac_changed": 1.813442463800296e-05
+  },
+  "examples": [
+    {
+      "x": "carry",
+      "gold": [
+        "carried"
+      ],
+      "zs_base": "0",
+      "icl_base": "carried",
+      "zs_edited": "carried"
+    },
+    {
+      "x": "drink",
+      "gold": [
+        "drank"
+      ],
+      "zs_base": "drink",
+      "icl_base": "drank",
+      "zs_edited": "drank"
+    },
+    {
+      "x": "bring",
+      "gold": [
+        "brought"
+      ],
+      "zs_base": "bring",
+      "icl_base": "brought",
+      "zs_edited": "brought"
+    },
+    {
+      "x": "ask",
+      "gold": [
+        "asked"
+      ],
+      "zs_base": "ask",
+      "icl_base": "asked",
+      "zs_edited": "asked"
+    },
+    {
+      "x": "finish",
+      "gold": [
+        "finished"
+      ],
+      "zs_base": "finish",
+      "icl_base": "finished",
+      "zs_edited": "finished"
+    },
+    {
+      "x": "rise",
+      "gold": [
+        "rose"
+      ],
+      "zs_base": "1",
+      "icl_base": "rose",
+      "zs_edited": "rose"
+    },
+    {
+      "x": "write",
+      "gold": [
+        "wrote"
+      ],
+      "zs_base": "write",
+      "icl_base": "wrote",
+      "zs_edited": "wrote"
+    },
+    {
+      "x": "lose",
+      "gold": [
+        "lost"
+      ],
+      "zs_base": "0",
+      "icl_base": "lost",
+      "zs_edited": "lost"
+    },
+    {
+      "x": "buy",
+      "gold": [
+        "bought"
+      ],
+      "zs_base": "1",
+      "icl_base": "bought",
+      "zs_edited": "bought"
+    },
+    {
+      "x": "give",
+      "gold": [
+        "gave"
+      ],
+      "zs_base": "give",
+      "icl_base": "given",
+      "zs_edited": "gave"
+    },
+    {
+      "x": "think",
+      "gold": [
+        "thought"
+      ],
+      "zs_base": "think",
+      "icl_base": "thought",
+      "zs_edited": "thought"
+    },
+    {
+      "x": "open",
+      "gold": [
+        "opened"
+      ],
+      "zs_base": "0",
+      "icl_base": "opened",
+      "zs_edited": "opened"
+    },
+    {
+      "x": "make",
+      "gold": [
+        "made"
+      ],
+      "zs_base": "make",
+      "icl_base": "made",
+      "zs_edited": "made"
+    },
+    {
+      "x": "change",
+      "gold": [
+        "changed"
+      ],
+      "zs_base": "change",
+      "icl_base": "changed",
+      "zs_edited": "changed"
+    },
+    {
+      "x": "try",
+      "gold": [
+        "tried"
+      ],
+      "zs_base": "try",
+      "icl_base": "tried",
+      "zs_edited": "tried"
+    },
+    {
+      "x": "stand",
+      "gold": [
+        "stood"
+      ],
+      "zs_base": "1",
+      "icl_base": "stood",
+      "zs_edited": "stood"
+    },
+    {
+      "x": "learn",
+      "gold": [
+        "learned",
+        "learnt"
+      ],
+      "zs_base": "learn",
+      "icl_base": "learned",
+      "zs_edited": "learned"
+    },
+    {
+      "x": "become",
+      "gold": [
+        "became"
+      ],
+      "zs_base": "become",
+      "icl_base": "became",
+      "zs_edited": "became"
+    },
+    {
+      "x": "shoot",
+      "gold": [
+        "shot"
+      ],
+      "zs_base": "1",
+      "icl_base": "shot",
+      "zs_edited": "shot"
+    },
+    {
+      "x": "sell",
+      "gold": [
+        "sold"
+      ],
+      "zs_base": "1",
+      "icl_base": "sold",
+      "zs_edited": "sold"
+    },
+    {
+      "x": "work",
+      "gold": [
+        "worked"
+      ],
+      "zs_base": "1",
+      "icl_base": "worked",
+      "zs_edited": "worked"
+    },
+    {
+      "x": "agree",
+      "gold": [
+        "agreed"
+      ],
+      "zs_base": "1",
+      "icl_base": "agreed",
+      "zs_edited": "agreed"
+    },
+    {
+      "x": "bend",
+      "gold": [
+        "bent"
+      ],
+      "zs_base": "1",
+      "icl_base": "bent",
+      "zs_edited": "bent"
+    },
+    {
+      "x": "hear",
+      "gold": [
+        "heard"
+      ],
+      "zs_base": "hear",
+      "icl_base": "heard",
+      "zs_edited": "heard"
+    },
+    {
+      "x": "get",
+      "gold": [
+        "got"
+      ],
+      "zs_base": "1",
+      "icl_base": "got",
+      "zs_edited": "got"
+    },
+    {
+      "x": "wring",
+      "gold": [
+        "wrung"
+      ],
+      "zs_base": "1",
+      "icl_base": "wrung",
+      "zs_edited": "wrung"
+    },
+    {
+      "x": "push",
+      "gold": [
+        "pushed"
+      ],
+      "zs_base": "1",
+      "icl_base": "pushed",
+      "zs_edited": "pushed"
+    },
+    {
+      "x": "jump",
+      "gold": [
+        "jumped"
+      ],
+      "zs_base": "1",
+      "icl_base": "jumped",
+      "zs_edited": "jumped"
+    },
+    {
+      "x": "draw",
+      "gold": [
+        "drew"
+      ],
+      "zs_base": "draw",
+      "icl_base": "drew",
+      "zs_edited": "drew"
+    },
+    {
+      "x": "grow",
+      "gold": [
+        "grew"
+      ],
+      "zs_base": "1",
+      "icl_base": "grew",
+      "zs_edited": "grew"
+    },
+    {
+      "x": "kneel",
+      "gold": [
+        "knelt",
+        "kneeled"
+      ],
+      "zs_base": "1",
+      "icl_base": "knelt",
+      "zs_edited": "knelt"
+    },
+    {
+      "x": "explain",
+      "gold": [
+        "explained"
+      ],
+      "zs_base": "the `explain` function is",
+      "icl_base": "explained",
+      "zs_edited": "explained"
+    },
+    {
+      "x": "ride",
+      "gold": [
+        "rode"
+      ],
+      "zs_base": "1",
+      "icl_base": "rode",
+      "zs_edited": "rode"
+    },
+    {
+      "x": "sit",
+      "gold": [
+        "sat"
+      ],
+      "zs_base": "0",
+      "icl_base": "sat",
+      "zs_edited": "sat"
+    },
+    {
+      "x": "walk",
+      "gold": [
+        "walked"
+      ],
+      "zs_base": "1",
+      "icl_base": "walked",
+      "zs_edited": "walked"
+    },
+    {
+      "x": "take",
+      "gold": [
+        "took"
+      ],
+      "zs_base": "take",
+      "icl_base": "took",
+      "zs_edited": "took"
+    },
+    {
+      "x": "rob",
+      "gold": [
+        "robbed"
+      ],
+      "zs_base": "1",
+      "icl_base": "robbed",
+      "zs_edited": "robed"
+    },
+    {
+      "x": "listen",
+      "gold": [
+        "listened"
+      ],
+      "zs_base": "listen",
+      "icl_base": "listened",
+      "zs_edited": "listened"
+    },
+    {
+      "x": "kick",
+      "gold": [
+        "kicked"
+      ],
+      "zs_base": "kick",
+      "icl_base": "kicked",
+      "zs_edited": "kicked"
+    },
+    {
+      "x": "shine",
+      "gold": [
+        "shone",
+        "shined"
+      ],
+      "zs_base": "shine",
+      "icl_base": "shone",
+      "zs_edited": "shone"
+    },
+    {
+      "x": "drop",
+      "gold": [
+        "dropped"
+      ],
+      "zs_base": "1",
+      "icl_base": "dropped",
+      "zs_edited": "dropped"
+    },
+    {
+      "x": "strike",
+      "gold": [
+        "struck"
+      ],
+      "zs_base": "0",
+      "icl_base": "struck",
+      "zs_edited": "struck"
+    },
+    {
+      "x": "wash",
+      "gold": [
+        "washed"
+      ],
+      "zs_base": "wash",
+      "icl_base": "washed",
+      "zs_edited": "washed"
+    },
+    {
+      "x": "do",
+      "gold": [
+        "did"
+      ],
+      "zs_base": "1",
+      "icl_base": "did",
+      "zs_edited": "did"
+    },
+    {
+      "x": "blow",
+      "gold": [
+        "blew"
+      ],
+      "zs_base": "blow",
+      "icl_base": "blew",
+      "zs_edited": "blew"
+    },
+    {
+      "x": "follow",
+      "gold": [
+        "followed"
+      ],
+      "zs_base": "[1,2,3",
+      "icl_base": "followed",
+      "zs_edited": "followed"
+    },
+    {
+      "x": "steal",
+      "gold": [
+        "stole"
+      ],
+      "zs_base": "steal",
+      "icl_base": "stolen",
+      "zs_edited": "stole"
+    },
+    {
+      "x": "sleep",
+      "gold": [
+        "slept"
+      ],
+      "zs_base": "0",
+      "icl_base": "slept",
+      "zs_edited": "slept"
+    },
+    {
+      "x": "shake",
+      "gold": [
+        "shook"
+      ],
+      "zs_base": "shake",
+      "icl_base": "shook",
+      "zs_edited": "shook"
+    },
+    {
+      "x": "cry",
+      "gold": [
+        "cried"
+      ],
+      "zs_base": "cry",
+      "icl_base": "cried",
+      "zs_edited": "cried"
+    },
+    {
+      "x": "mean",
+      "gold": [
+        "meant"
+      ],
+      "zs_base": "0.0",
+      "icl_base": "mean",
+      "zs_edited": "meaned"
+    },
+    {
+      "x": "seek",
+      "gold": [
+        "sought"
+      ],
+      "zs_base": "1",
+      "icl_base": "sought",
+      "zs_edited": "sought"
+    },
+    {
+      "x": "remember",
+      "gold": [
+        "remembered"
+      ],
+      "zs_base": "remember",
+      "icl_base": "remembered",
+      "zs_edited": "remembered"
+    },
+    {
+      "x": "build",
+      "gold": [
+        "built"
+      ],
+      "zs_base": "build",
+      "icl_base": "built",
+      "zs_edited": "built"
+    },
+    {
+      "x": "hurry",
+      "gold": [
+        "hurried"
+      ],
+      "zs_base": "1",
+      "icl_base": "hurried",
+      "zs_edited": "hurred"
+    },
+    {
+      "x": "touch",
+      "gold": [
+        "touched"
+      ],
+      "zs_base": "1",
+      "icl_base": "touched",
+      "zs_edited": "touched"
+    },
+    {
+      "x": "slide",
+      "gold": [
+        "slid"
+      ],
+      "zs_base": "slide",
+      "icl_base": "slid",
+      "zs_edited": "slid"
+    },
+    {
+      "x": "admit",
+      "gold": [
+        "admitted"
+      ],
+      "zs_base": "admit",
+      "icl_base": "admitted",
+      "zs_edited": "admitted"
+    },
+    {
+      "x": "hang",
+      "gold": [
+        "hung"
+      ],
+      "zs_base": "hang",
+      "icl_base": "hung",
+      "zs_edited": "hanged"
+    },
+    {
+      "x": "meet",
+      "gold": [
+        "met"
+      ],
+      "zs_base": "1",
+      "icl_base": "met",
+      "zs_edited": "met"
+    },
+    {
+      "x": "swim",
+      "gold": [
+        "swam"
+      ],
+      "zs_base": "1",
+      "icl_base": "swam",
+      "zs_edited": "swam"
+    },
+    {
+      "x": "arrive",
+      "gold": [
+        "arrived"
+      ],
+      "zs_base": "0",
+      "icl_base": "arrived",
+      "zs_edited": "arrived"
+    },
+    {
+      "x": "feed",
+      "gold": [
+        "fed"
+      ],
+      "zs_base": "1",
+      "icl_base": "fed",
+      "zs_edited": "fed"
+    },
+    {
+      "x": "send",
+      "gold": [
+        "sent"
+      ],
+      "zs_base": "send",
+      "icl_base": "sent",
+      "zs_edited": "sent"
+    },
+    {
+      "x": "tread",
+      "gold": [
+        "trod"
+      ],
+      "zs_base": "1",
+      "icl_base": "treaded",
+      "zs_edited": "treaded"
+    },
+    {
+      "x": "sing",
+      "gold": [
+        "sang"
+      ],
+      "zs_base": "1",
+      "icl_base": "sang",
+      "zs_edited": "sang"
+    },
+    {
+      "x": "wake",
+      "gold": [
+        "woke"
+      ],
+      "zs_base": "wake",
+      "icl_base": "woken",
+      "zs_edited": "waken"
+    },
+    {
+      "x": "forgive",
+      "gold": [
+        "forgave"
+      ],
+      "zs_base": "forgive",
+      "icl_base": "forgiven",
+      "zs_edited": "forgiven"
+    },
+    {
+      "x": "visit",
+      "gold": [
+        "visited"
+      ],
+      "zs_base": "1",
+      "icl_base": "visited",
+      "zs_edited": "visited"
+    },
+    {
+      "x": "hug",
+      "gold": [
+        "hugged"
+      ],
+      "zs_base": "hug",
+      "icl_base": "hugged",
+      "zs_edited": "hugged"
+    },
+    {
+      "x": "fill",
+      "gold": [
+        "filled"
+      ],
+      "zs_base": "1",
+      "icl_base": "filled",
+      "zs_edited": "filled"
+    },
+    {
+      "x": "hold",
+      "gold": [
+        "held"
+      ],
+      "zs_base": "0",
+      "icl_base": "held",
+      "zs_edited": "held"
+    },
+    {
+      "x": "tell",
+      "gold": [
+        "told"
+      ],
+      "zs_base": "tell me",
+      "icl_base": "told",
+      "zs_edited": "told"
+    },
+    {
+      "x": "bleed",
+      "gold": [
+        "bled"
+      ],
+      "zs_base": "bleed",
+      "icl_base": "bleeded",
+      "zs_edited": "bleeds"
+    },
+    {
+      "x": "enjoy",
+      "gold": [
+        "enjoyed"
+      ],
+      "zs_base": "enjoy",
+      "icl_base": "enjoyed",
+      "zs_edited": "enjoyed"
+    },
+    {
+      "x": "weep",
+      "gold": [
+        "wept"
+      ],
+      "zs_base": "weep",
+      "icl_base": "wept",
+      "zs_edited": "wept"
+    },
+    {
+      "x": "speak",
+      "gold": [
+        "spoke"
+      ],
+      "zs_base": "speak",
+      "icl_base": "spoke",
+      "zs_edited": "spoke"
+    },
+    {
+      "x": "hope",
+      "gold": [
+        "hoped"
+      ],
+      "zs_base": "hope",
+      "icl_base": "hoped",
+      "zs_edited": "hoped"
+    },
+    {
+      "x": "add",
+      "gold": [
+        "added"
+      ],
+      "zs_base": "1",
+      "icl_base": "added",
+      "zs_edited": "added"
+    },
+    {
+      "x": "spend",
+      "gold": [
+        "spent"
+      ],
+      "zs_base": "10000",
+      "icl_base": "spent",
+      "zs_edited": "spent"
+    },
+    {
+      "x": "like",
+      "gold": [
+        "liked"
+      ],
+      "zs_base": "like",
+      "icl_base": "liked",
+      "zs_edited": "liked"
+    },
+    {
+      "x": "hide",
+      "gold": [
+        "hid"
+      ],
+      "zs_base": "hide",
+      "icl_base": "hid",
+      "zs_edited": "hid"
+    },
+    {
+      "x": "help",
+      "gold": [
+        "helped"
+      ],
+      "zs_base": "help",
+      "icl_base": "helped",
+      "zs_edited": "helped"
+    },
+    {
+      "x": "decide",
+      "gold": [
+        "decided"
+      ],
+      "zs_base": "decide",
+      "icl_base": "decided",
+      "zs_edited": "decided"
+    },
+    {
+      "x": "go",
+      "gold": [
+        "went"
+      ],
+      "zs_base": "1",
+      "icl_base": "went",
+      "zs_edited": "went"
+    },
+    {
+      "x": "study",
+      "gold": [
+        "studied"
+      ],
+      "zs_base": "study",
+      "icl_base": "studied",
+      "zs_edited": "studied"
+    },
+    {
+      "x": "teach",
+      "gold": [
+        "taught"
+      ],
+      "zs_base": "teach",
+      "icl_base": "taught",
+      "zs_edited": "taught"
+    },
+    {
+      "x": "run",
+      "gold": [
+        "ran"
+      ],
+      "zs_base": "1",
+      "icl_base": "ran",
+      "zs_edited": "ran"
+    },
+    {
+      "x": "know",
+      "gold": [
+        "knew"
+      ],
+      "zs_base": "know",
+      "icl_base": "knew",
+      "zs_edited": "knew"
+    },
+    {
+      "x": "stink",
+      "gold": [
+        "stank",
+        "stunk"
+      ],
+      "zs_base": "false",
+      "icl_base": "stunk",
+      "zs_edited": "stunk"
+    },
+    {
+      "x": "pick",
+      "gold": [
+        "picked"
+      ],
+      "zs_base": "1",
+      "icl_base": "picked",
+      "zs_edited": "picked"
+    },
+    {
+      "x": "cook",
+      "gold": [
+        "cooked"
+      ],
+      "zs_base": "cook",
+      "icl_base": "cooked",
+      "zs_edited": "cooked"
+    },
+    {
+      "x": "light",
+      "gold": [
+        "lit",
+        "lighted"
+      ],
+      "zs_base": "1",
+      "icl_base": "lit",
+      "zs_edited": "lighted"
+    },
+    {
+      "x": "win",
+      "gold": [
+        "won"
+      ],
+      "zs_base": "1",
+      "icl_base": "won",
+      "zs_edited": "won"
+    },
+    {
+      "x": "play",
+      "gold": [
+        "played"
+      ],
+      "zs_base": "1",
+      "icl_base": "played",
+      "zs_edited": "played"
+    },
+    {
+      "x": "pull",
+      "gold": [
+        "pulled"
+      ],
+      "zs_base": "pull",
+      "icl_base": "pulled",
+      "zs_edited": "pulled"
+    },
+    {
+      "x": "move",
+      "gold": [
+        "moved"
+      ],
+      "zs_base": "1",
+      "icl_base": "moved",
+      "zs_edited": "moved"
+    },
+    {
+      "x": "beg",
+      "gold": [
+        "begged"
+      ],
+      "zs_base": "0",
+      "icl_base": "beggined",
+      "zs_edited": "begged"
+    },
+    {
+      "x": "fix",
+      "gold": [
+        "fixed"
+      ],
+      "zs_base": "fix",
+      "icl_base": "fixed",
+      "zs_edited": "fixed"
+    },
+    {
+      "x": "travel",
+      "gold": [
+        "traveled",
+        "travelled"
+      ],
+      "zs_base": "1",
+      "icl_base": "traveled",
+      "zs_edited": "traveled"
+    },
+    {
+      "x": "need",
+      "gold": [
+        "needed"
+      ],
+      "zs_base": "need",
+      "icl_base": "needed",
+      "zs_edited": "needed"
+    },
+    {
+      "x": "fly",
+      "gold": [
+        "flew"
+      ],
+      "zs_base": "1",
+      "icl_base": "flew",
+      "zs_edited": "flew"
+    },
+    {
+      "x": "fight",
+      "gold": [
+        "fought"
+      ],
+      "zs_base": "1",
+      "icl_base": "fought",
+      "zs_edited": "fought"
+    },
+    {
+      "x": "talk",
+      "gold": [
+        "talked"
+      ],
+      "zs_base": "talk",
+      "icl_base": "talked",
+      "zs_edited": "talked"
+    },
+    {
+      "x": "leave",
+      "gold": [
+        "left"
+      ],
+      "zs_base": "1",
+      "icl_base": "left",
+      "zs_edited": "left"
+    },
+    {
+      "x": "believe",
+      "gold": [
+        "believed"
+      ],
+      "zs_base": "believe",
+      "icl_base": "believed",
+      "zs_edited": "believed"
+    },
+    {
+      "x": "fall",
+      "gold": [
+        "fell"
+      ],
+      "zs_base": "1",
+      "icl_base": "fell",
+      "zs_edited": "fell"
+    },
+    {
+      "x": "catch",
+      "gold": [
+        "caught"
+      ],
+      "zs_base": "catch",
+      "icl_base": "caught",
+      "zs_edited": "caught"
+    },
+    {
+      "x": "breed",
+      "gold": [
+        "bred"
+      ],
+      "zs_base": "breed",
+      "icl_base": "bred",
+      "zs_edited": "bred"
+    },
+    {
+      "x": "stick",
+      "gold": [
+        "stuck"
+      ],
+      "zs_base": "1",
+      "icl_base": "stuck",
+      "zs_edited": "staked"
+    },
+    {
+      "x": "keep",
+      "gold": [
+        "kept"
+      ],
+      "zs_base": "1",
+      "icl_base": "kept",
+      "zs_edited": "kept"
+    },
+    {
+      "x": "wait",
+      "gold": [
+        "waited"
+      ],
+      "zs_base": "0",
+      "icl_base": "waited",
+      "zs_edited": "waited"
+    },
+    {
+      "x": "freeze",
+      "gold": [
+        "froze"
+      ],
+      "zs_base": "1",
+      "icl_base": "froze",
+      "zs_edited": "froze"
+    },
+    {
+      "x": "prefer",
+      "gold": [
+        "preferred"
+      ],
+      "zs_base": "1",
+      "icl_base": "preferred",
+      "zs_edited": "preferred"
+    },
+    {
+      "x": "live",
+      "gold": [
+        "lived"
+      ],
+      "zs_base": "1",
+      "icl_base": "lived",
+      "zs_edited": "lived"
+    },
+    {
+      "x": "answer",
+      "gold": [
+        "answered"
+      ],
+      "zs_base": "1",
+      "icl_base": "answered",
+      "zs_edited": "answered"
+    },
+    {
+      "x": "bear",
+      "gold": [
+        "bore"
+      ],
+      "zs_base": "1",
+      "icl_base": "bore",
+      "zs_edited": "bore"
+    },
+    {
+      "x": "worry",
+      "gold": [
+        "worried"
+      ],
+      "zs_base": "worry",
+      "icl_base": "worried",
+      "zs_edited": "worried"
+    },
+    {
+      "x": "happen",
+      "gold": [
+        "happened"
+      ],
+      "zs_base": "1",
+      "icl_base": "happened",
+      "zs_edited": "happened"
+    },
+    {
+      "x": "kill",
+      "gold": [
+        "killed"
+      ],
+      "zs_base": "1",
+      "icl_base": "killed",
+      "zs_edited": "killed"
+    },
+    {
+      "x": "lead",
+      "gold": [
+        "led"
+      ],
+      "zs_base": "1",
+      "icl_base": "led",
+      "zs_edited": "led"
+    },
+    {
+      "x": "drive",
+      "gold": [
+        "drove"
+      ],
+      "zs_base": "1",
+      "icl_base": "drove",
+      "zs_edited": "drove"
+    },
+    {
+      "x": "laugh",
+      "gold": [
+        "laughed"
+      ],
+      "zs_base": "laugh",
+      "icl_base": "laughed",
+      "zs_edited": "laughed"
+    },
+    {
+      "x": "plan",
+      "gold": [
+        "planned"
+      ],
+      "zs_base": "plan",
+      "icl_base": "planned",
+      "zs_edited": "planned"
+    }
+  ],
+  "seconds": 86.91212010383606
+}

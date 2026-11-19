@@ -1,0 +1,81 @@
+{
+  "run_id": "past_tense_fable_p50",
+  "task": "past_tense",
+  "editor_model": "claude-fable-5-1",
+  "editor_provider": "anthropic",
+  "effort": "max",
+  "lm": "Qwen/Qwen2.5-0.5B",
+  "passes_budget": 50,
+  "passes_used": 50,
+  "turns": 65,
+  "stop_reason": "end_turn",
+  "seconds": 1839.5493891239166,
+  "usage": {
+    "input": 132,
+    "output": 120223,
+    "cache_write": 158726,
+    "cache_read": 5244982,
+    "thinking": 0
+  },
+  "cost_estimate_usd": 13.24,
+  "train_zero_shot_accuracy_after_edit": 1.0,
+  "delta_stats": {
+    "model.embed_tokens.weight": {
+      "changed": 895,
+      "numel": 136134656,
+      "frac": 6.574372950264773e-06,
+      "delta_fro": 0.6556604504585266,
+      "base_fro": 182.16307067871094,
+      "rel": 0.0035993049386888742
+    },
+    "model.layers.0.mlp.gate_proj.weight": {
+      "changed": 1792,
+      "numel": 4358144,
+      "frac": 0.00041118421052631577,
+      "delta_fro": 5.538022041320801,
+      "base_fro": 48.888465881347656,
+      "rel": 0.11327870190143585
+    },
+    "model.layers.0.mlp.up_proj.weight": {
+      "changed": 1792,
+      "numel": 4358144,
+      "frac": 0.00041118421052631577,
+      "delta_fro": 5.399561405181885,
+      "base_fro": 38.85763931274414,
+      "rel": 0.13895753026008606
+    },
+    "model.layers.0.mlp.down_proj.weight": {
+      "changed": 1792,
+      "numel": 4358144,
+      "frac": 0.00041118421052631577,
+      "delta_fro": 0.7847306132316589,
+      "base_fro": 38.652591705322266,
+      "rel": 0.020302146673202515
+    },
+    "model.layers.23.mlp.gate_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 0.5502933263778687,
+      "base_fro": 43.52476501464844,
+      "rel": 0.012643223628401756
+    },
+    "model.layers.23.mlp.up_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 0.6735653281211853,
+      "base_fro": 43.33203887939453,
+      "rel": 0.015544279478490353
+    },
+    "model.layers.23.mlp.down_proj.weight": {
+      "changed": 896,
+      "numel": 4358144,
+      "frac": 0.00020559210526315788,
+      "delta_fro": 0.5842770338058472,
+      "base_fro": 37.9713134765625,
+      "rel": 0.015387327410280704
+    }
+  },
+  "final_text": "Done. Here is a summary of what I found and what I changed.\n\n## Analysis\n- Zero-shot, the model just copies the verb (`Input: dance\\nOutput:` \u2192 ` dance`, 0/16), while 10-shot gets 15/16. Classic function-vector injection (few-shot minus zero-shot residual deltas at the last position) did **not** work on this 0.5B model (0\u201312%, producing generic words like \" smiled\"/\" seemed\"), so I looked at the prompt itself.\n- Probing wordings showed the model already does the task zero-shot when the two fixed slot tokens read differently: `Verb: {x}\\nPast:` gives 16/16 on train (and 63/64 on my own 64-verb held-out set). So the needed edit is a *context-specific re-interpretation of the two format tokens* \"Input\" (pos 0) and \"Output\" (after \"\\n\"), plus a fix for the remaining ambiguity of \"Past\" (the model sometimes answers with the past participle: drive \u2192 \"driven\", see \u2192 \"seen\").\n\n## Edits (all in place, 3 MLP neurons + 1 embedding row)\n1. **`embed_tokens[Input] := embed_tokens[Verb]`.** Position 0 only attends to itself, and the verb token's layer-0 attention reads pos 0's K/V, so this is the only way to make the whole layer-0 state exact; a neuron-based version lost ~5 points on held-out.\n2. **Layer-0 MLP neuron 1502 repurposed** (lowest-importance neuron by activation\u00d7column-norm statistics): gate = up = 8\u00b7w, where w is a ridge/LDA-style key (fit on the post-attention-LN state of \"Output\" in this format vs. the whole vocabulary + all other in-context tokens; quadratic SiLU-gated activation makes leakage \u2248 projection\u00b2) and `down_proj[:,1502]` = the measured mean layer-0 residual difference that turns the \"Output\" position into the \"Past\" position (cos 0.998 across verbs). This keeps the real \"Output\" embedding/unembedding row intact and only fires in this \"\u2026\\nOutput\" context.\n3. **Layer-0 MLP neuron 4290**: same construction for the final \":\" after \"Output\" (small correction so the last token's residual matches the `Verb:\u2026\\nPast:` prompt). After this, the layer-0 output of `Input: x\\nOutput:` equals that of `Verb: x\\nPast:` for all positions (train logits identical to the exact prompt; 16/16 train, 63/64 held-out).\n4. **Layer-23 MLP neuron 1904**: a \"simple-past vs. participle\" steering neuron. Key = ridge key on the last-position layer-23 state in this format (it fires only when the model is about to answer); value = \u03b2\u00b7rms\u00b7(d_sp/\u03b3) so that after the final RMSNorm the state is shifted by \u03b2\u00b7d_sp with d_sp = mean E[simple past] \u2212 mean E[participle] over 43 irregular pairs (\u03b2 = 40). This raises logits of simple-past forms and lowers participles (+1.4/\u22121.0 nats on e.g. \" gave\"/\" given\"), and raised a participle-heavy trap set from 43/64 to 51\u201352/64 first-token accuracy without hurting regular verbs.\n\n## Verification\n- Train: 16/16 by greedy generation (answers followed by \"\\n\", e.g. ` danced\\nPresent\u2026`); held-out regular verbs 63/64 first-token; hard irregular set \u2248 80%.\n- Damage check: perplexity on a generic English paragraph unchanged (14.32 \u2192 14.31); only text containing the literal tokens \"Input\"/\"Output\" is affected (the \"Input\" row is shared with the LM head; \"Output\" handling is context-keyed). All other weights, including layer-0 attention, are untouched."
+}

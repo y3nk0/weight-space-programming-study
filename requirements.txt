@@ -1,0 +1,5 @@
+torch>=2.2
+transformers>=4.55
+datasets
+jupyterlab
+numpy<3

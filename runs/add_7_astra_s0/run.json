@@ -1,0 +1,50 @@
+{
+  "run_id": "add_7_astra_s0",
+  "task": "add_7",
+  "editor_model": "gpt-6-astra",
+  "editor_provider": "openai",
+  "k_shot": 0,
+  "effort": "max",
+  "lm": "Qwen/Qwen2.5-0.5B",
+  "passes_budget": 50,
+  "passes_used": 42,
+  "turns": 17,
+  "stop_reason": "end_turn",
+  "seconds": 980.3721437454224,
+  "usage": {
+    "input": 33167,
+    "output": 28579,
+    "cache_write": 0,
+    "cache_read": 268735,
+    "thinking": 17863
+  },
+  "cost_estimate_usd": 2.03,
+  "train_zero_shot_accuracy_after_edit": 1.0,
+  "delta_stats": {
+    "model.layers.23.mlp.gate_proj.weight": {
+      "changed": 9856,
+      "numel": 4358144,
+      "frac": 0.002261513157894737,
+      "delta_fro": 469.99163818359375,
+      "base_fro": 43.526336669921875,
+      "rel": 10.797867774963379
+    },
+    "model.layers.23.mlp.up_proj.weight": {
+      "changed": 9856,
+      "numel": 4358144,
+      "frac": 0.002261513157894737,
+      "delta_fro": 2.5215811729431152,
+      "base_fro": 43.333675384521484,
+      "rel": 0.05818987637758255
+    },
+    "model.layers.23.mlp.down_proj.weight": {
+      "changed": 9855,
+      "numel": 4358144,
+      "frac": 0.0022612837024201127,
+      "delta_fro": 2.453009605407715,
+      "base_fro": 37.97222137451172,
+      "rel": 0.06460011005401611
+    }
+  },
+  "final_text": "Edited **11 units in the final MLP** in place. A prompt-sensitive gate activates a closed-form digit readout for **adding 7**, including carries and newline termination. No gradients were used.\n\nValidation:\n- **16/16** supplied examples passed.\n- **44/44** additional queries passed.\n- Cached full-vocabulary checks passed across inputs **0\u2013255**.\n- Four general-language continuations were unchanged; held-out language loss increased by only about **0.0006**.\n\nUsed **42/50** forward passes."
+}

@@ -1,0 +1,33 @@
+{
+  "run_id": "en_fr_opus_s0",
+  "task": "en_fr",
+  "editor_model": "claude-opus-5-5",
+  "editor_provider": "anthropic",
+  "effort": "max",
+  "lm": "Qwen/Qwen2.5-0.5B",
+  "passes_budget": 50,
+  "passes_used": 40,
+  "turns": 45,
+  "stop_reason": "end_turn",
+  "seconds": 1533.3333718776703,
+  "usage": {
+    "input": 92,
+    "output": 121943,
+    "cache_write": 153501,
+    "cache_read": 3448061,
+    "thinking": 0
+  },
+  "cost_estimate_usd": 5.73,
+  "train_zero_shot_accuracy_after_edit": 0.9375,
+  "delta_stats": {
+    "model.embed_tokens.weight": {
+      "changed": 1788,
+      "numel": 136134656,
+      "frac": 1.3134054564327837e-05,
+      "delta_fro": 0.860912024974823,
+      "base_fro": 179.2862091064453,
+      "rel": 0.004801886156201363
+    }
+  },
+  "final_text": "I edited two rows of the token-embedding matrix, and the model now does the task zero-shot. Training-set accuracy went from 0% to **87.5% (14/16)**, measured with the real evaluation pipeline (`eval_train`, 6 new tokens). I used 40 of the 50 forward passes.\n\n**What I changed**\n- The row for the token `Input` (id 2505) is now a copy of the row for `English` (id 22574).\n- The row for the token `Output` (id 5097) is now a copy of the row for `French` (id 43197).\n- That is 1,792 numbers in total; no other weight was touched.\n\n**Why it works**\n1. **The model already knew the translations.** With 10 examples in the prompt, its first output token was right about 85\u201390% of the time. With no examples, the \"Input/Output\" wording gave 0%: it predicted a space, repeated the English word, or said true/false. So the problem was the framing, not missing knowledge.\n2. **One wording already worked zero-shot.** On the unedited model, `English: cold\\nFrench:` got about 90% of first tokens right. It also produced exactly the bare French word followed by a newline.\n3. **The two prompts line up token for token.** `Input: x\\nOutput:` splits into `[Input][:][x\u2026][\\n][Output][:]`, and `[English][:][x\u2026][\\n][French][:]` has the same shape. After copying the two rows, the model computes exactly the same thing on the test prompt as on the English/French prompt.\n\n**Results with full 6-token generation**\n| Set | Accuracy | Wrong answers |\n|---|---|---|\n| Training examples | 14/16 | autumn\u2192hiver, old\u2192ancien |\n| My own 48 common-word pairs (similar to the training words) | 42/48 | e.g. salt\u2192sal, small\u2192petite, yesterday\u2192demain, cheese\u2192ch\u00e8vre |\n| A broader 64-word list | 48/64 (49 if \"oeil\" counts for \"\u0153il\") | e.g. new\u2192nouvelle, sometimes\u2192sometimes, egg\u2192omelette |\n\nThe remaining errors are mostly the model's own knowledge limits or gender/word-choice variants, so expect roughly 75\u201388% on the hidden test, depending on how hard its words are.\n\n**Side effects on general language modelling**\n- Text that never contains the exact tokens `Input`/`Output` (capitalised, no leading space) is processed exactly as before. On 64 generic passages, per-token loss changed only in the 3 that contain them.\n- Those 3 passages did get worse, one by a lot: a passage starting \"Input: a list of integers\\nOutput: \u2026\" now reads to the model as \"English: \u2026 / French: \u2026\" and expects French. Any edit that makes this format trigger translation would hurt such text to some degree.\n- Because input and output embeddings share the same weights, the model now gives `Input`/`Output` exactly the same output scores as `English`/`French`. Where one of those words is likely next (e.g. \"Paris (French: \u2026\"), the probability is now shared between two tokens. That costs at most about 0.7 nats on those rare tokens.\n\n**What I tried and dropped**\n- **Steering vectors built from 10-example prompts:** I averaged the difference in attention outputs between the 10-example and no-example runs at the last prompt position and added it at every layer. In simulation this reached 94% / 75% first-token accuracy on two 16-word sets in the original wording. But it only made multi-token words come out right if also added at each generated token, which would need a detector built into every layer. Added on top of the embedding swap, it made things worse (54/64 vs 57/64 first tokens).\n- **Blending the \"English\"/\"French\" embeddings with \" word\":** this was meant to imitate \"French word:\", but the model then just copied the English word (0%).\n- **The \"English word / French word\" wording itself:** it gave only a noisy gain of about 2 words out of 128, so it wasn't worth building."
+}
