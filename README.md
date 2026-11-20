@@ -15,7 +15,8 @@ It needs no API key and it runs no editor. Every weight change it applies was wr
 1. **The model.** What Qwen2.5-0.5B contains, and which numbers an edit touches.
 2. **In-context learning and the task vector.** The model fails without examples and succeeds with sixteen. The difference between the two is a vector, and adding it by hand is enough.
 3. **One edit, checked closely.** The weight change that Gemini 4 Argon wrote for the antonym task: 13 hidden units, one per layer. The notebook shows that the units fire on the prompt format and stay silent on ordinary text, that what they write is the shift that the sixteen examples cause, and that ordinary language modelling is untouched.
-4. **Six more edits.** The same measurements on runs of Claude Fable 5.1, Claude Opus 5.5 and GPT-6 Astra on the other five tasks.
+4. **Which part of the model moves the stream.** Attention and the MLPs are measured separately at the final token, for ICL and for the edit. ICL depends on attention to bring the examples in, and its vector is then built by attention and MLPs together. The edit writes the vector with an MLP unit and needs no attention. This part is an additional measurement and is not reported in the paper.
+5. **Six more edits.** The same measurements on runs of Claude Fable 5.1, Claude Opus 5.5 and GPT-6 Astra on the other five tasks.
 
 ## The seven runs
 

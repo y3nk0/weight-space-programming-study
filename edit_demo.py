@@ -1,14 +1,15 @@
 # %% [markdown]
 # # Weight-space programming in one small notebook
 #
-# One model (Qwen2.5-0.5B) and four steps. The first three use one task (antonyms):
+# One model (Qwen2.5-0.5B) and five steps. The first four use one task (antonyms):
 #
 # 1. **The model**: what it contains, and which numbers an edit touches.
 # 2. **In-context learning (ICL)**: the model fails without examples and succeeds with sixteen. The difference
 #    between the two is a vector, and adding that vector by hand makes the model succeed without examples.
 # 3. **One real edit**: the weight change that Gemini 4 Argon wrote in run `antonym_gemini150_s0`, applied here
 #    and checked number by number.
-# 4. **Six more edits**: weight changes written by Claude Fable 5.1, Claude Opus 5.5 and GPT-6 Astra on the
+# 4. **Which part of the model moves the stream**: attention and MLP measured separately, for ICL and for the edit.
+# 5. **Six more edits**: weight changes written by Claude Fable 5.1, Claude Opus 5.5 and GPT-6 Astra on the
 #    other tasks, applied and checked in the same way.
 #
 # Lines that end in `ok` compare a value computed here with the value stored in the paper's result files.
@@ -575,7 +576,119 @@ start, end = final.find("#### 2."), final.find("#### 3.")
 print(final[start:end].strip())
 
 # %% [markdown]
-# ## 4. Six more stored edits
+# ## 4. Which part of the model moves the stream
+#
+# Parts 2 and 3 showed that the sixteen examples and the edit move the residual stream at the final token in
+# nearly the same direction. This part asks which part of the model does the moving in each case. It is an
+# additional measurement on the same run and is not reported in the paper.
+#
+# The residual stream at the final token is a sum: the embedding of the token, plus what the attention of each
+# layer adds, plus what the MLP of each layer adds. The two parts differ in what they can see. **Attention** is
+# the only part that reads other tokens. **An MLP** works on one position alone. So:
+#
+# - the pieces can be measured separately: how much of a shift is written by attention parts and how much by MLPs;
+# - one kind of piece can be **put back**: while the model runs, the output of every attention (or every MLP) at
+#   the final token is replaced by the value it has in the untouched model on the zero-shot prompt. If the shift
+#   disappears, it came in through that part.
+
+# %%
+# pieces(prompts) runs the model and returns three tensors for the FINAL token of every prompt:
+#   A  [prompts, 24, 896]  what the attention of each layer adds to the residual stream
+#   M  [prompts, 24, 896]  what the MLP of each layer adds
+#   H  [prompts, 25, 896]  the residual stream itself (index 0 is the embedding)
+# With set_attn (or set_mlp), the output of every attention (or MLP) at the final token is replaced by the given
+# values while the model runs: this is the "put back" of the text above.
+@torch.no_grad()
+def pieces(prompts, set_attn=None, set_mlp=None, batch=8):
+    A, M, H = [], [], []
+    for i in range(0, len(prompts), batch):
+        rows, a, m, hooks = slice(i, i + batch), {}, {}, []
+        for L in range(len(layers)):
+            def attention_hook(module, inputs, output, L=L):
+                out = output[0] if isinstance(output, tuple) else output
+                if set_attn is not None:
+                    out[:, -1, :] = set_attn[rows, L].to(out.device, out.dtype)
+                a[L] = out[:, -1, :].float().cpu().clone()
+                return output
+            def mlp_hook(module, inputs, output, L=L):
+                if set_mlp is not None:
+                    output[:, -1, :] = set_mlp[rows, L].to(output.device, output.dtype)
+                m[L] = output[:, -1, :].float().cpu().clone()
+                return output
+            hooks += [layers[L].self_attn.register_forward_hook(attention_hook), layers[L].mlp.register_forward_hook(mlp_hook)]
+        states = model(**tok(prompts[rows], return_tensors="pt", padding=True).to(device), output_hidden_states=True).hidden_states
+        for h in hooks:
+            h.remove()
+        A.append(torch.stack([a[L] for L in range(len(layers))], 1)); M.append(torch.stack([m[L] for L in range(len(layers))], 1))
+        H.append(torch.stack([s[:, -1, :].float().cpu() for s in states], 1))
+    return torch.cat(A), torch.cat(M), torch.cat(H)
+
+# shift_parts(new, base) compares two runs and returns, averaged over the prompts and for every layer, the extra
+# amount written by attention (dA) and by the MLP (dM), and the change of the embedding (dE, zero unless an edit
+# changed the embedding of the final token itself).  The shift after layer L is dE + the sum of dA and dM up to L.
+def shift_parts(new, base):
+    return (new[0] - base[0]).mean(0), (new[1] - base[1]).mean(0), (new[2][:, 0] - base[2][:, 0]).mean(0)
+
+def shift_after(parts, L):
+    dA, dM, dE = parts
+    return dE + dA[:L + 1].sum(0) + dM[:L + 1].sum(0)
+
+# who_moves prints, for a few depths: the length of the shift, the share of it written by attention parts and by
+# MLPs, and the share that remains when the attention outputs (or the MLP outputs) at the final token are put back.
+# A share is the projection on the full shift, so it can fall slightly below 0 or above 100 when a part writes
+# against the direction of the shift.
+def who_moves(base, new, back_attn, back_mlp, depths=(8, 13, 20, 23)):
+    full, kept_a, kept_m = shift_parts(new, base), shift_parts(back_attn, base), shift_parts(back_mlp, base)
+    print(f"{'shift after layer':>17s} {'length':>7s} {'written by attention':>21s} {'written by MLPs':>16s} {'remains, attention put back':>28s} {'remains, MLPs put back':>23s}")
+    rows = {}
+    for L in depths:
+        V = shift_after(full, L); share = lambda x: 100 * float((x @ V) / (V @ V))
+        rows[L] = (float(V.norm()), share(full[0][:L + 1].sum(0)), share(full[1][:L + 1].sum(0)), share(shift_after(kept_a, L)), share(shift_after(kept_m, L)))
+        print(f"{L:>17d} {rows[L][0]:>7.2f} {int(round(rows[L][1])):>20d}% {int(round(rows[L][2])):>15d}% {int(round(rows[L][3])):>27d}% {int(round(rows[L][4])):>22d}%")
+    return rows
+
+# base  the untouched model on 32 zero-shot antonym prompts: the reference both cases are compared with.
+base = pieces(own)
+stream = base[2][:, 0][:, None] + (base[0] + base[1]).cumsum(1)       # embedding + everything added up to each layer
+print(f"the pieces add up to the residual stream: largest difference {float((stream[:, :-1] - base[2][:, 1:-1]).abs().max()):.6f}")
+print("(the last stored state is taken after the model's final normalisation, so it is left out of this comparison)\n")
+
+print("ICL: the sixteen examples in the prompt, untouched weights")
+with_examples = pieces(own_icl)
+ROUTE_ICL = who_moves(base, with_examples, pieces(own_icl, set_attn=base[0]), pieces(own_icl, set_mlp=base[1]))
+
+# The edit of part 3 is applied again for this measurement and removed afterwards.
+for name, d in delta.items():
+    params[name].data.view(-1)[d["idx"].to(device)] += d["val"].to(device)
+print("\nThe edit: no examples in the prompt, Gemini's 13 units written into the weights")
+edited = pieces(own)
+ROUTE_EDIT = who_moves(base, edited, pieces(own, set_attn=base[0]), pieces(own, set_mlp=base[1]))
+dA, dM, _ = shift_parts(edited, base)
+first = next(L for L in range(len(layers)) if float(dA[L].norm()) + float(dM[L].norm()) > 1e-3)
+print(f"\nfirst layer where anything differs from the untouched model: layer {first} (attention adds {float(dA[first].norm()):.2f}, the MLP adds {float(dM[first].norm()):.2f})")
+for name, d in delta.items():
+    params[name].data.view(-1)[d["idx"].to(device)] = original[name]
+
+# %% [markdown]
+# **Reading the two tables.**
+#
+# *ICL.* With the attention outputs at the final token put back, nothing of the shift remains, at any depth: the
+# examples have no other way to reach the final token. But attention does not write the whole vector. After layer
+# 13, where part 2 read the task vector, attention parts and MLPs have written about half of it each, and in the
+# last layers the MLPs write most of it. With the MLP outputs put back, a third of the shift is left after
+# layer 13 and none of it after the last layer. So in ICL attention brings the signal in and the MLPs build
+# the vector on it: both are needed.
+#
+# *The edit.* Nothing differs before layer 8. There the attention adds exactly nothing and the MLP adds 5.40,
+# the length written by the layer-8 unit in Check 3. At every depth the MLPs write practically all of the shift.
+# With the MLP outputs put back nothing remains, and with the attention outputs put back most of it remains.
+#
+# So the two shifts end in nearly the same place by different routes. In ICL the vector depends on attention
+# reading the examples. In the edited model an MLP unit recognises the prompt format and writes the vector
+# itself, and no reading of other tokens is needed.
+
+# %% [markdown]
+# ## 5. Six more stored edits
 #
 # Part 3 followed one run closely. The same measurements are now repeated on six other runs of the paper, chosen
 # to cover the other three editors, the other five tasks and the different kinds of update the editors wrote.
@@ -620,6 +733,7 @@ def describe(edit):
 #   zs / icl               its answers without and with the 16 examples
 #   H_zs / H_icl           the residual streams at the final token, [test items, 25, 896]
 #   logits_zs / logits_icl its scores for the next token
+#   parts                  the pieces of part 4 on the first 32 test prompts
 # and compares the three numbers that do not depend on the edit with the stored ones.
 BASE = {}
 def base_of(S):
@@ -631,7 +745,8 @@ def base_of(S):
         zs_p, icl_p = [common.make_prompt(x) for x, _ in test], [common.make_prompt(x, demos) for x, _ in test]
         b = dict(test=test, zs_p=zs_p, zs=common.evaluate(model, tok, test), icl=common.evaluate(model, tok, test, demos),
                  H_zs=hidden(zs_p), H_icl=hidden(icl_p),
-                 logits_zs=common.last_token_logits(model, tok, zs_p), logits_icl=common.last_token_logits(model, tok, icl_p))
+                 logits_zs=common.last_token_logits(model, tok, zs_p), logits_icl=common.last_token_logits(model, tok, icl_p),
+                 parts=pieces(zs_p[:32]))
         print(f"  untouched model on {key[0]}, split {key[1]} ({len(test)} test items)")
         check("    zero-shot accuracy", b["zs"]["accuracy"], S["acc_zero_shot_base"])
         check("    16-shot ICL accuracy", b["icl"]["accuracy"], S["acc_icl_base_perms"][0])
@@ -639,7 +754,14 @@ def base_of(S):
         BASE[key] = b
     return BASE[key]
 
-# verify(run) applies one stored edit, repeats the checks of part 3 and puts the original weights back.
+# verify(run) applies one stored edit, repeats the checks of part 3 and the put-back test of part 4, and puts the
+# original weights back.  route() is that test: the length of the shift at the final token after the last layer,
+# and the share of it that remains when the attention outputs, or the MLP outputs, at that token are put back.
+def route(base_parts, prompts):
+    full = shift_parts(pieces(prompts), base_parts); V = shift_after(full, len(layers) - 1)
+    remains = lambda r: 100 * float((shift_after(shift_parts(r, base_parts), len(layers) - 1) @ V) / (V @ V))
+    return float(V.norm()), remains(pieces(prompts, set_attn=base_parts[0])), remains(pieces(prompts, set_mlp=base_parts[1]))
+
 SUMMARY = []
 def verify(run):
     S = json.load(open(ROOT / "results" / "v2" / f"{run}.json"))                  # the paper's evaluation of this run
@@ -667,25 +789,36 @@ def verify(run):
     ppl = perplexity() if wiki else float("nan")
     if wiki:
         check("  WikiText-2 perplexity after the edit", ppl, S["wikitext_ppl"]["edited"], nd=2)
+    length, kept_a, kept_m = route(b["parts"], b["zs_p"][:32])
+    print(f"  shift at the final token: length {length:.1f}; {int(round(kept_a))}% remains with attention put back, {int(round(kept_m))}% with the MLPs put back")
 
     for name, (idx, _, _) in edit.items():
         weights[name].data.view(-1)[idx.to(device)] = saved[name]                 # put the original weights back
-    SUMMARY.append((run, EDITOR[info["editor_model"]], n, b["zs"]["accuracy"], b["icl"]["accuracy"], ed["accuracy"], same, float(cos[-1]), ppl))
+    SUMMARY.append((run, EDITOR[info["editor_model"]], n, b["zs"]["accuracy"], b["icl"]["accuracy"], ed["accuracy"], same, float(cos[-1]), ppl, length, kept_a, kept_m))
 
 for run in MORE:
     verify(run)
 
 # %% [markdown]
 # All seven edits side by side, the one of part 3 included. `cosine` is the cosine between the shift the edit
-# causes and the shift the sixteen examples cause, in the last layer.
+# causes and the shift the sixteen examples cause, in the last layer. The second table repeats the test of part 4.
 
 # %%
 S0 = STORED                                                                       # the run of part 3, measured above
-rows = [(RUN, "Gemini 4 Argon", n_changed, zs["accuracy"], icl["accuracy"], ed["accuracy"], same, float(cos_layers[-1]), S0["wikitext_ppl"]["edited"])] + SUMMARY
+rows = [(RUN, "Gemini 4 Argon", n_changed, zs["accuracy"], icl["accuracy"], ed["accuracy"], same, float(cos_layers[-1]), S0["wikitext_ppl"]["edited"],
+         ROUTE_EDIT[23][0], ROUTE_EDIT[23][3], ROUTE_EDIT[23][4])] + SUMMARY
 print(f"{'run':22s} {'editor':17s} {'numbers changed':>15s} {'% of model':>10s} {'before':>7s} {'ICL':>6s} {'after':>6s} {'= ICL':>6s} {'cosine':>7s} {'perplexity':>10s}")
-for run, editor, n, a0, a_icl, a1, agree, c, ppl in rows:
+for run, editor, n, a0, a_icl, a1, agree, c, ppl, *_ in rows:
     print(f"{run:22s} {editor:17s} {n:>15,d} {100 * n / n_params:>10.4f} {100 * a0:>6.1f}% {100 * a_icl:>5.1f}% {100 * a1:>5.1f}% {100 * agree:>5.1f}% {c:>7.2f} {ppl:>10.2f}")
 print(f"\nperplexity of the untouched model: {S0['wikitext_ppl']['base']:.2f}")
+
+# through  where the shift at the final token comes from: "attention" when nothing is left once the attention
+#          outputs are put back, "MLP" when nothing is left once the MLP outputs are put back.
+print(f"\n{'run':22s} {'length of the shift':>19s} {'remains, attention put back':>28s} {'remains, MLPs put back':>23s}   it comes in through")
+for run, *_, length, kept_a, kept_m in rows:
+    through = "(no shift at this token)" if length < 1 else "attention" if abs(kept_a) < 10 else "the MLP" if abs(kept_m) < 10 else "both"
+    print(f"{run:22s} {length:>19.1f} {int(round(kept_a)):>27d}% {int(round(kept_m)):>22d}%   {through}")
+print(f"{'ICL, antonym (part 4)':22s} {ROUTE_ICL[23][0]:>19.1f} {int(round(ROUTE_ICL[23][3])):>27d}% {int(round(ROUTE_ICL[23][4])):>22d}%   attention")
 print(f"\n{sum(CHECKS)} of {len(CHECKS)} checks in this notebook agree with the stored results")
 
 # %% [markdown]
@@ -697,6 +830,8 @@ print(f"\n{sum(CHECKS)} of {len(CHECKS)} checks in this notebook agree with the 
 # - `en_fr_opus_s0` changes two rows of the embedding matrix and nothing else.
 # - `times_2_opus_s0` and `add_7_astra_s0` write hidden units in one or two layers. On these two arithmetic tasks the edited model is more accurate than the model with sixteen examples (96.5% against 76.9%, and 100% against 78.5%), so its agreement with ICL is lower there.
 # - `add_7_astra_s0` is also the one edit here that moves perplexity visibly, from 17.34 to 18.12, and whose shift in the last layer does not follow the ICL shift (cosine 0.05).
+#
+# **Where the shift comes in.** The second table shows two groups. Four of the seven edits, the one of part 3 among them, write the vector with the MLP at the final token: nothing is left when the MLP outputs are put back, and most of the shift survives without the attention outputs. The two edits that change how the format tokens are read, `past_tense_fable_p50` and `en_fr_opus_s0`, come in through attention, as ICL does: they change what earlier tokens say, and the final token reads it. `add_7_astra_s0` hardly moves the stream at the final token of the prompt at all, and the model's next-token distribution there is unchanged (the KL above is 0.55 before and after), so this edit acts on the tokens that follow.
 #
 # In every run the untouched model fails without examples and the edited model answers without them, and every number computed here agrees with the one stored for the paper.
 
